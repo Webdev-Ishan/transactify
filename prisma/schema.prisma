@@ -14,16 +14,17 @@ datasource db {
 }
 
 model user {
-  id        Int           @id @default(autoincrement())
-  username  String
-  email     String        @unique
-  password  String
-  number    String        @unique
-  upiID     String        @unique
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @default(now())
-  send      transaction[] @relation("Sender")
-  recieved  transaction[] @relation("Reciever")
+  id         Int           @id @default(autoincrement())
+  username   String
+  email      String        @unique
+  password   String
+  number     String        @unique
+  upiID      String        @unique
+  isVerified Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @default(now())
+  send       transaction[] @relation("Sender")
+  recieved   transaction[] @relation("Reciever")
 }
 
 model transaction {
@@ -37,6 +38,15 @@ model transaction {
   user        user?         @relation("Reciever", fields: [userId], references: [id])
   userId      Int?
 }
+
+model Otp {
+  id         Int   @id @default(autoincrement())
+  email      String
+  otp        String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+}
+
 
 enum PaymentStatus {
   PENDING

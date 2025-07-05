@@ -2,7 +2,8 @@ import { prisma } from "@/lib/DB";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import bcrypt from "bcrypt";
-import { transporter } from "@/lib/nodemailer";
+import { Resend } from "resend";
+
 
 export const registerSchema = z.object({
   username: z.string().min(3).max(16),
@@ -13,6 +14,10 @@ export const registerSchema = z.object({
 });
 
 const salt = process.env.SALT;
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
@@ -35,11 +40,11 @@ export async function POST(req: NextRequest) {
   const { username, email, password, number, upiID } = parsedBody.data;
 
   try {
-    const exist = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findFirst({
       where: { OR: [{ number: number }, { email: email }] },
     });
 
-    if (exist) {
+    if (existingUser) {
       return NextResponse.json(
         { success: false, error: "User already exist, Please Login" },
         { status: 409 }
@@ -51,36 +56,40 @@ export async function POST(req: NextRequest) {
 
     const newNumber = "+91".concat(number);
 
-    const user = await prisma.user.create({
+    const createduser = await prisma.user.create({
       data: {
         username,
         email,
         password: hashedPassword,
         number: newNumber,
         upiID,
+        isVerified: false,
       },
     });
 
-    if (!user) {
+    if (!createduser) {
       return NextResponse.json(
         { success: false, error: "Oops try again!!" },
         { status: 409 }
       );
     }
 
-    const mailOptions = {
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: "Account is registered",
-      text: `Your registration at Transactify is done.`,
-    };
+    await prisma.otp.create({
+      data: {
+        email: createduser.email,
+        otp,
+        expiresAt: new Date(Date.now() + 30 * 1000),
+      },
+    });
 
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: createduser.email,
+      subject: "Hello world",
+      text: `Welcome to Transactify. Ypur otp is ${otp}`,
+    });
 
-    return NextResponse.json(
-      { success: true, message: "Registration sucessfull" },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json(
