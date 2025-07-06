@@ -8,7 +8,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 function InputOTPControlled() {
@@ -17,6 +17,8 @@ function InputOTPControlled() {
   const [otp, setOtp] = React.useState("");
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
 
   // ✅ Redirect if already logged in
   React.useEffect(() => {
@@ -37,26 +39,25 @@ function InputOTPControlled() {
     try {
       setIsSubmitting(true);
 
-      const response = await axios.post("/api/verify-email", {
+      const response = await axios.post("/api/auth/verify-email", {
         otp, // match backend key here
+        email,
       });
 
-      if (response.data?.success) {
+      if ( response.data?.success) {
         toast.success("Verification successful. Logging you in...");
 
         // Sign in using credentials if email/password are returned
-        const signInRes = await signIn("credentials", {
-          email: response.data.email,      // assume backend returns this
+         await signIn("credentials", {
+          email: response.data.email, // assume backend returns this
           username: response.data.username, // or a temporary login token
-          id:response.data.id,
+          id: response.data.id,
           redirect: false,
         });
 
-        if (signInRes?.ok) {
-          router.push("/Profile");
-        } else {
-          toast.error("Login failed after verification.");
-        }
+        
+        router.push("/");
+       
       } else {
         toast.error(response.data?.message || "Invalid OTP");
       }
@@ -73,7 +74,7 @@ function InputOTPControlled() {
     <form onSubmit={handleOtpSubmit} className="space-y-6 h-60">
       <InputOTP maxLength={6} value={otp} onChange={(val) => setOtp(val)}>
         <InputOTPGroup className="text-white">
-          <InputOTPSlot index={0}  />
+          <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
           <InputOTPSlot index={2} />
           <InputOTPSlot index={3} />
@@ -101,4 +102,4 @@ function InputOTPControlled() {
   );
 }
 
-export  default InputOTPControlled
+export default InputOTPControlled;

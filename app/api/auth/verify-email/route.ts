@@ -57,7 +57,13 @@ export async function POST(req: NextRequest) {
       });
 
       return NextResponse.json(
-        { success: true, message: "Verification successful" },
+        {
+          success: true,
+          message: "Verification successful",
+          email: user.email,
+          username: user.username, // include this only if it exists in your schema
+          id: user.id,
+        },
         { status: 200 }
       );
     }

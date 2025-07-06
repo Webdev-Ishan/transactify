@@ -4,7 +4,6 @@ import { z } from "zod";
 import bcrypt from "bcrypt";
 import { Resend } from "resend";
 
-
 export const registerSchema = z.object({
   username: z.string().min(3).max(16),
   email: z.string().nonempty(),
@@ -78,7 +77,7 @@ export async function POST(req: NextRequest) {
       data: {
         email: createduser.email,
         otp,
-        expiresAt: new Date(Date.now() + 30 * 1000),
+        expiresAt: new Date(Date.now() + 60 * 1000),
       },
     });
 

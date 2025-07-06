@@ -60,7 +60,7 @@ export function SignupFormDemo() {
         setusername("");
         setnumber("");
         setupiID("");
-        router.push("/otp");
+        router.push(`/otp?email=${encodeURIComponent(email)}`);
       } else {
         toast.success("Something went wrong.");
         setemail("");
