@@ -60,6 +60,7 @@ export const authOptions: NextAuthOptions = {
             email: existingUser.email,
             username: existingUser.username || null,
             name: existingUser.username || "", // required by DefaultUser
+            success:true
           } as User;
         } catch (error) {
           if (error instanceof Error) {
@@ -72,9 +73,9 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-    error: "/auth/error",
+    signIn: "/signin",
+    signOut: "/signout",
+    error: "/error",
   },
   session: {
     strategy: "jwt",

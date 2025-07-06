@@ -13,19 +13,19 @@ import { toast } from "react-toastify";
 
 function InputOTPControlled() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [otp, setOtp] = React.useState("");
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
-  // ✅ Redirect if already logged in
   React.useEffect(() => {
-    if (session) {
-      router.push("/Profile");
+    if (status === "authenticated") {
+      router.push("/");
+      toast.info("You are already logged in!!!");
     }
-  }, [session]);
+  }, [session, status]);
 
   // ✅ Handle OTP verification
   const handleOtpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,20 +44,18 @@ function InputOTPControlled() {
         email,
       });
 
-      if ( response.data?.success) {
+      if (response.data?.success) {
         toast.success("Verification successful. Logging you in...");
 
         // Sign in using credentials if email/password are returned
-         await signIn("credentials", {
+        await signIn("credentials", {
           email: response.data.email, // assume backend returns this
           username: response.data.username, // or a temporary login token
           id: response.data.id,
           redirect: false,
         });
 
-        
         router.push("/");
-       
       } else {
         toast.error(response.data?.message || "Invalid OTP");
       }
