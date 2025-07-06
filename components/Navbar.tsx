@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import SignOut from "./Signout";
+import { useRouter } from "next/navigation";
 
 export function NavbarDemo() {
   return (
@@ -18,12 +19,12 @@ export function NavbarDemo() {
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-
+const router = useRouter();
   return (
     <div className={cn("fixed top-3 inset-x-0 w-full z-50", className)}>
       <nav className="flex items-center hover:shadow hover:shadow-blue-500 transition duration-300 justify-between w-[98%]  mr-2 ml-2  px-4 md:px-8 bg-white rounded-4xl dark:bg-black shadow">
         <div className="flex items-center">
-          <h1 className="text-blue-500 text-xl font-sans md:text-lg font-bold">
+          <h1 onClick={()=>router.push("/")} className="text-blue-500 cursor-pointer text-xl font-sans md:text-lg font-bold">
             Transactify
           </h1>
         </div>
