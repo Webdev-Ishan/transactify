@@ -21,9 +21,9 @@ export function SignupFormDemo() {
   React.useEffect(() => {
     if (status === "authenticated") {
       router.push("/");
-      toast.info("You are already logged in!!!");
+      
     }
-  }, [session, status]);
+  }, [status,session]);
 
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -49,16 +49,16 @@ export function SignupFormDemo() {
       });
 
       if (response?.ok) {
-        toast.success("An OTP is sended to your registered email.");
-        router.push(`/otp?email=${encodeURIComponent(email)}`);
+        toast.success("LoggedIn successfull.");
         setemail("");
         setpassword("");
       } else {
-        toast.success("Something went wrong.");
+        toast.error("Something went wrong.");
+        console.log(response?.error)
         setemail("");
         setpassword("");
 
-        console.log(response?.error);
+        
       }
     } catch (error) {
       toast.error("OOps try again!!");
@@ -68,7 +68,7 @@ export function SignupFormDemo() {
     }
   };
   return (
-    <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
+    <div className="shadow-input mt-10  ml-2 mr-2   w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Welcome to Transactify
       </h2>
