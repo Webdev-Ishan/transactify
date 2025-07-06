@@ -8,7 +8,7 @@ import { Resend } from "resend";
 export const registerSchema = z.object({
   username: z.string().min(3).max(16),
   email: z.string().nonempty(),
-  password: z.string(),
+  password: z.string().min(6),
   number: z.string().length(10),
   upiID: z.string().regex(/^[\w.-]+@[\w.-]+$/, "Invalid UPI ID format"),
 });
