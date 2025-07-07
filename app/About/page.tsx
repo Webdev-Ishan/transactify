@@ -6,7 +6,7 @@ import about from '../../public/about.jpg'
 function About() {
     const router = useRouter()
   return (
-    <div className="w-full h-auto">
+    <div className="w-full h-auto bg-black ">
       <section className="py-24 relative">
         <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
           <div className="w-full justify-start items-center gap-8 grid lg:grid-cols-2 grid-cols-1">
