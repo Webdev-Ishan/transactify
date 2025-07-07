@@ -69,7 +69,7 @@ function InputOTPControlled() {
   };
 
   return (
-    <form onSubmit={handleOtpSubmit} className="space-y-6 h-60">
+    <form onSubmit={handleOtpSubmit} className="space-y-6 mt-10 h-60 ">
       <InputOTP maxLength={6} value={otp} onChange={(val) => setOtp(val)}>
         <InputOTPGroup className="text-white">
           <InputOTPSlot index={0} />

@@ -22,7 +22,7 @@ function Navbar({ className }: { className?: string }) {
 const router = useRouter();
   return (
     <div className={cn("fixed top-3 inset-x-0 w-full z-50", className)}>
-      <nav className="flex items-center hover:shadow hover:shadow-blue-500 transition duration-300 justify-between w-[98%]  mr-2 ml-2  px-4 md:px-8 bg-white rounded-4xl dark:bg-black shadow">
+      <nav className="flex items-center border border-white hover:shadow hover:shadow-blue-500 transition duration-300 justify-between w-[98%]  mr-2 ml-2  px-4 md:px-8 bg-white rounded-4xl dark:bg-black shadow">
         <div className="flex items-center">
           <h1 onClick={()=>router.push("/")} className="text-blue-500 cursor-pointer text-xl font-sans md:text-lg font-bold">
             Transactify
@@ -113,6 +113,7 @@ const router = useRouter();
               className="text-green-400 text-xs "
               setActive={setActive}
               active={active}
+              onclick={()=>{router.push("/About")}}
               item="About Us"
             >
               <div className="flex flex-col space-y-4 text-xs ">

@@ -7,8 +7,6 @@ import clsx from "clsx"; // or use 'classnames' if you prefer
 // Alias 'clsx' as 'cn' for compatibility with the rest of the code
 const cn = clsx;
 
-
-
 const transition = {
   type: "spring" as const,
   mass: 0.5,
@@ -23,22 +21,29 @@ export const MenuItem = ({
   active,
   item,
   children,
-  className
+  className,
+  onclick,
 }: {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
-  className?:string
+  className?: string;
+  onclick?: () => void;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className={`relative`} >
+    <div
+      onMouseEnter={() => setActive(item)}
+      onClick={() => {
+        onclick?.(); // ✅ Call onClick if provided
+      }}
+      className={`relative`}
+    >
       <motion.p
-          transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3 }}
         className={cn(
           "cursor-pointer hover:text-blue-500",
-          className, // <-- custom styles here
-          
+          className // <-- custom styles here
         )}
       >
         {item}
@@ -74,7 +79,6 @@ export const MenuItem = ({
 export const Menu = ({
   setActive,
   children,
-  
 }: {
   setActive: (item: string | null) => void;
   children: React.ReactNode;
@@ -126,10 +130,7 @@ export const HoveredLink = ({
   ...rest
 }: React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>) => {
   return (
-    <a
-      {...rest}
-      className="text-white hover:text-blue-500 "
-    >
+    <a {...rest} className="text-white hover:text-blue-500 ">
       {children}
     </a>
   );
