@@ -25,6 +25,7 @@ model user {
   updatedAt  DateTime      @default(now())
   send       transaction[] @relation("Sender")
   recieved   transaction[] @relation("Reciever")
+  contactID  Contact?     @relation("SenderID")
 }
 
 model transaction {
@@ -45,6 +46,12 @@ model Otp {
   otp       String
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Contact {
+  id       Int   @id @default(autoincrement())
+  sender   user? @relation("SenderID", fields: [senderId], references: [id])
+  senderId Int? @unique
 }
 
 enum PaymentStatus {

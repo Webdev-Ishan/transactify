@@ -62,52 +62,16 @@ const router = useRouter();
         <div className="hidden md:flex flex-1 justify-evenly">
           <Menu setActive={setActive}>
             <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Services">
-              <div className="flex flex-col space-y-4 text-xs">
-                <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                <HoveredLink href="/interface-design">
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href="/seo">
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href="/branding">Branding</HoveredLink>
-              </div>
+             
             </MenuItem>
             <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Documents">
-              <div className="flex flex-col space-y-4 text-xs">
-                <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                <HoveredLink href="/interface-design">
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href="/seo">
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href="/branding">Branding</HoveredLink>
-              </div>
+             
             </MenuItem>
-            <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Themes">
-              <div className="flex flex-col space-y-4 text-xs">
-                <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                <HoveredLink href="/interface-design">
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href="/seo">
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href="/branding">Branding</HoveredLink>
-              </div>
+            <MenuItem setActive={setActive} active={active} onclick={()=>router.push("/Contact")} className="text-white text-xs" item="Contact">
+             
             </MenuItem>
             <MenuItem setActive={setActive} active={active} onclick={()=>router.push("/FAQ")} className="text-white text-xs" item="FAQs">
-              <div className="flex flex-col space-y-4 text-xs">
-                <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                <HoveredLink href="/interface-design">
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href="/seo">
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href="/branding">Branding</HoveredLink>
-              </div>
+              
             </MenuItem>
             <MenuItem
               className="text-green-400 text-xs "
@@ -116,16 +80,7 @@ const router = useRouter();
               onclick={()=>{router.push("/About")}}
               item="About Us"
             >
-              <div className="flex flex-col space-y-4 text-xs ">
-                <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                <HoveredLink href="/interface-design">
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href="/seo">
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href="/branding">Branding</HoveredLink>
-              </div>
+              
             </MenuItem>
             <SignOut />
           </Menu>
@@ -139,6 +94,7 @@ const router = useRouter();
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
             <HoveredLink href="/seo" onClick={()=>router.push("/FAQ")}>Frequently Asked Questions</HoveredLink>
             <HoveredLink href="/branding" onClick={()=>router.push("/About")} >About Us</HoveredLink>
+            <HoveredLink href="/branding" onClick={()=>router.push("/signin")} >Sign In</HoveredLink>
             
           </div>
         </div>
