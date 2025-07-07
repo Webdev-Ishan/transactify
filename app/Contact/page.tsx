@@ -59,7 +59,7 @@ function Contact() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error("OOps try again!!");
+        toast.error(error.message);
         console.log(error);
         settopic("");
         setcontent("");

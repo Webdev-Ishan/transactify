@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/DB";
 import z from "zod";
 import { getToken } from "next-auth/jwt";
+import { Resend } from "resend";
 
 export const Contactschema = z.object({
   topic: z.string().min(2).max(20),
@@ -9,6 +10,9 @@ export const Contactschema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  
+
   const data = await req.json();
   const parsedBody = Contactschema.safeParse(data);
 
@@ -56,10 +60,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
+
+    const formalreadyexists = await prisma.contact.findFirst({
+      where:{
+        senderId:exist.id
+      }
+    })
+
+    if(formalreadyexists){
+       return NextResponse.json(
+        {
+          success: false,
+          error: "Form is already submitted.",
+        },
+        {
+          status: 411,
+        }
+      );
+    }
+
     const contact = await prisma.contact.create({
       data: {
         topic: topic,
         content: content,
+        senderId:exist.id
       },
     });
 
@@ -74,6 +98,13 @@ export async function POST(req: NextRequest) {
         }
       );
     }
+
+    await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: exist.email,
+      subject: "Contact request is submitted",
+      html: "Your form for the enquiry is sumitted , our team will reach out to you soon.",
+    });
 
     return NextResponse.json(
       {

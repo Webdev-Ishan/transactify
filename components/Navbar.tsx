@@ -91,7 +91,7 @@ const router = useRouter();
         <div className="md:hidden bg-white dark:bg-black shadow px-4 py-2">
           <div className="flex flex-col space-y-2">
             <HoveredLink href="/web-dev" onClick={()=>router.push("/")}>Transactify</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
+            <HoveredLink href="/interface-design" onClick={()=>router.push("/Contact")}>Contact Us</HoveredLink>
             <HoveredLink href="/seo" onClick={()=>router.push("/FAQ")}>Frequently Asked Questions</HoveredLink>
             <HoveredLink href="/branding" onClick={()=>router.push("/About")} >About Us</HoveredLink>
             <HoveredLink href="/branding" onClick={()=>router.push("/signin")} >Sign In</HoveredLink>
