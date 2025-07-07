@@ -50,7 +50,7 @@ model Otp {
 
 model Contact {
   id       Int    @id @default(autoincrement())
-  tpoic    String
+  topic    String
   content  String
   sender   user?  @relation("SenderID", fields: [senderId], references: [id])
   senderId Int?   @unique
