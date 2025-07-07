@@ -25,7 +25,7 @@ export function SignupFormDemo() {
   React.useEffect(() => {
     if (!session?.expires) {
       router.push("/");
-      toast.info("You are already logged in!!!");
+      toast.info("You are already Registered!!!");
     }
   }, []);
 
@@ -82,6 +82,7 @@ export function SignupFormDemo() {
     }
   };
   return (
+    <div className="w-full h-auto flex mt-10 justify-center items-center mb-4">
     <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Welcome to Transactify
@@ -154,6 +155,7 @@ export function SignupFormDemo() {
 
         <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
       </form>
+    </div>
     </div>
   );
 }

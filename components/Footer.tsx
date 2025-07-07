@@ -7,7 +7,12 @@ function Footer() {
       <footer className="w-full py-28 px-36 ">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-blue-500  text-center   text-5xl font-bold font-sans">Transactify</h1>
+            <div className="w-full flex justify-center items-center pr-2 mr-2 text-center">
+              {" "}
+              <h1 className="text-blue-500 mr-2 text-4xl md:text-5xl font-bold font-sans">
+                Transactify
+              </h1>
+            </div>
             <a href="#" className="flex justify-center ">
               <svg
                 className="w-40 h-8"
@@ -15,7 +20,6 @@ function Footer() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                
                 <defs>
                   <linearGradient
                     id="paint0_linear_9129_4680"
@@ -127,7 +131,6 @@ function Footer() {
                   viewBox="0 0 30 22"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  
                 >
                   <path
                     fillRule="evenodd"
