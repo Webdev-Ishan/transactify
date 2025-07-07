@@ -25,7 +25,7 @@ model user {
   updatedAt  DateTime      @default(now())
   send       transaction[] @relation("Sender")
   recieved   transaction[] @relation("Reciever")
-  contactID  Contact?     @relation("SenderID")
+  contactID  Contact?      @relation("SenderID")
 }
 
 model transaction {
@@ -49,9 +49,11 @@ model Otp {
 }
 
 model Contact {
-  id       Int   @id @default(autoincrement())
-  sender   user? @relation("SenderID", fields: [senderId], references: [id])
-  senderId Int? @unique
+  id       Int    @id @default(autoincrement())
+  tpoic    String
+  content  String
+  sender   user?  @relation("SenderID", fields: [senderId], references: [id])
+  senderId Int?   @unique
 }
 
 enum PaymentStatus {
