@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/DB";
 import z from "zod";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authoptions";
+import { getToken } from "next-auth/jwt";
 
 export const Contactschema = z.object({
-  topic: z.string().min(12).max(100),
-  content: z.string().min(2).max(20),
+  topic: z.string().min(2).max(20),
+  content: z.string().min(12).max(100),
 });
 
 export async function POST(req: NextRequest) {
@@ -20,28 +19,23 @@ export async function POST(req: NextRequest) {
         error: parsedBody.error.format(),
       },
       {
-        status: 403,
+        status: 400,
       }
     );
   }
 
   const { content, topic } = parsedBody.data;
 
-  const session = await getServerSession(authOptions);
+  const token = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
 
-  if (!session?.user.id) {
+  if (!token || !token.id) {
     return NextResponse.json(
-      {
-        success: false,
-        error: "Please login",
-      },
-      {
-        status: 403,
-      }
+      { success: false, error: "Please login" },
+      { status: 403 }
     );
   }
 
-  const userid = session.user.id;
+  const userid = token.id;
 
   try {
     const exist = await prisma.user.findFirst({
