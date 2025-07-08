@@ -1,13 +1,14 @@
-"use client"
+"use client";
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
-import about from '../../public/about.jpg'
+import about from "../../public/about.jpg";
+import { CarouselDemo } from "@/components/Carousal";
 function About() {
-    const router = useRouter()
+  const router = useRouter();
   return (
     <div className="w-full h-auto bg-black ">
-      <section className="py-24 relative">
+      <section className="py-24 relative mb-6">
         <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
           <div className="w-full justify-start items-center gap-8 grid lg:grid-cols-2 grid-cols-1">
             <div className="w-full flex-col justify-start lg:items-start items-center gap-10 inline-flex">
@@ -26,7 +27,10 @@ function About() {
                 </p>
               </div>
               <button className="sm:w-fit w-full px-3.5 py-2 bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
-                <span onClick={()=>router.push("/signin")} className="px-1.5 text-white text-sm font-medium leading-6">
+                <span
+                  onClick={() => router.push("/signin")}
+                  className="px-1.5 text-white text-sm font-medium leading-6"
+                >
                   Get Started
                 </span>
               </button>
@@ -41,6 +45,12 @@ function About() {
           </div>
         </div>
       </section>
+      <div className="w-full h-auto p-4 flex justify-center gap-2 md:flex-row flex-col text-center items-center">
+        <div className="text-6xl text-white font-bold ">
+          Check Out Our Work
+        </div>
+        <CarouselDemo />
+      </div>
     </div>
   );
 }
