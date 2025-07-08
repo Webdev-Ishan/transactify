@@ -35,10 +35,30 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    const sendtransactions = await prisma.transaction.findMany({
+      where: {
+        id: Number(user?.send),
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const recievedtransactions = await prisma.transaction.findMany({
+      where: {
+        id: Number(user?.send),
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     return NextResponse.json(
       {
         success: true,
         user,
+        sendtransactions,
+        recievedtransactions,
       },
       {
         status: 200,
