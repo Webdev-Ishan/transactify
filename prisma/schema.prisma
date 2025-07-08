@@ -36,8 +36,8 @@ model transaction {
   Status      PaymentStatus @default(PENDING)
   sender      user?         @relation("Sender", fields: [senderId], references: [id])
   senderId    Int?
-  user        user?         @relation("Reciever", fields: [userId], references: [id])
-  userId      Int?
+  receiver    user?         @relation("Reciever", fields: [receiverId], references: [id])
+  receiverId  Int?
 }
 
 model Otp {

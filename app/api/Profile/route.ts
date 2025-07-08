@@ -12,79 +12,77 @@ export async function GET(req: NextRequest) {
         message: "Please login first",
       },
       {
-        status: 409,
+        status: 401,
       }
     );
   }
 
-  const userid = token.id;
+  const userid = Number(token.id);
 
   try {
+    // Get user info
     const user = await prisma.user.findUnique({
-      where: { id: Number(userid) },
-      include: {
-        send: true,
-        recieved: true,
+      where: { id: userid },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        upiID: true,
       },
     });
 
     if (!user) {
-      return NextResponse.json({
-        success: false,
-        message: "The user is not registered. ",
-      });
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Please register first",
+        },
+        { status: 404 }
+      );
     }
 
-    const sendtransactions = await prisma.transaction.findMany({
+    // Get transactions (sent or received)
+    const transactions = await prisma.transaction.findMany({
       where: {
-        id: Number(user?.send),
+        OR: [{ senderId: userid }, { receiverId: userid }],
       },
       orderBy: {
         createdAt: "desc",
       },
-    });
-
-    const recievedtransactions = await prisma.transaction.findMany({
-      where: {
-        id: Number(user?.send),
-      },
-      orderBy: {
-        createdAt: "desc",
+      include: {
+        sender: {
+          select: {
+            username: true,
+          },
+        },
+        receiver: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
 
     return NextResponse.json(
       {
         success: true,
-        user,
-        sendtransactions,
-        recievedtransactions,
+        userinfo: user,
+        transactions, // will be [] if none exist
       },
       {
         status: 200,
       }
     );
-  } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Something went wrong.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+  } catch (err) {
+    console.error("Profile fetch failed:", err);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Internal server error",
+      },
+      {
+        status: 500,
+      }
+    );
   }
-
-  return NextResponse.json(
-    {
-      success: false,
-      message: "Internal Server Error",
-    },
-    {
-      status: 500,
-    }
-  );
 }
