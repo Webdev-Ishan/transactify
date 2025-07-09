@@ -7,7 +7,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { useSession } from "next-auth/react";
 
 const registerSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters."),
@@ -19,15 +18,6 @@ const registerSchema = z.object({
 
 export function SignupFormDemo() {
   const router = useRouter(); // ✅ Don't destructure anything
-
-  const { data: session } = useSession();
-
-  React.useEffect(() => {
-    if (!session?.expires) {
-      router.push("/");
-      toast.info("You are already Registered!!!");
-    }
-  }, []);
 
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
@@ -55,25 +45,24 @@ export function SignupFormDemo() {
       const response = await axios.post("/api/auth/register", result.data);
 
       if (response.data && response.data.success) {
-        toast.success("An OTP is sended to your registered email.");
+        toast.success("An OTP is sended to your email");
         router.push(`/otp?email=${encodeURIComponent(email)}`);
-        setemail("");
-        setpassword("");
-        setusername("");
-        setnumber("");
-        setupiID("");
-      } else {
-        toast.success("Something went wrong.");
-        setemail("");
-        setpassword("");
-        setusername("");
-        setnumber("");
-        setupiID("");
-        console.log(response.data.error);
       }
     } catch (error) {
-      toast.error("OOps try again!!");
-      console.log(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const status = error.response.status;
+        if (status === 409) {
+          toast.info("You are already registered, please login.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      } else {
+        if (error instanceof Error) {
+          toast.error("Unexpected error. Try again later.");
+          console.error("Unknown error:", error);
+        }
+      }
+    } finally {
       setemail("");
       setpassword("");
       setusername("");
@@ -82,80 +71,80 @@ export function SignupFormDemo() {
     }
   };
   return (
-    <div className="w-full h-auto flex mt-10 justify-center items-center mb-4">
-    <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
-      <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
-        Welcome to Transactify
-      </h2>
-      <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        SignUp here please
-      </p>
+    <div className="w-full h-auto flex mt-12 justify-center items-center mb-4">
+      <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
+        <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+          Welcome to Transactify
+        </h2>
+        <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+          SignUp here please
+        </p>
 
-      <form className="my-8" onSubmit={handleSubmit}>
-        <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">Username</Label>
+        <form className="my-8" onSubmit={handleSubmit}>
+          <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
+            <LabelInputContainer>
+              <Label htmlFor="firstname">Username</Label>
+              <Input
+                id="firstname"
+                placeholder="Tyler"
+                type="text"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
+              />
+            </LabelInputContainer>
+          </div>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="email">Email Address</Label>
             <Input
-              id="firstname"
-              placeholder="Tyler"
-              type="text"
-              value={username}
-              onChange={(e) => setusername(e.target.value)}
+              id="email"
+              placeholder="projectmayhem@fc.com"
+              type="email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
             />
           </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input
-            id="email"
-            placeholder="projectmayhem@fc.com"
-            type="email"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-          />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            placeholder="••••••••"
-            type="password"
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-          />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="Number">number no.</Label>
-          <Input
-            id="Number"
-            placeholder="0000000"
-            type="text"
-            value={number}
-            onChange={(e) => setnumber(e.target.value)}
-          />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="UPI_id">UPI id</Label>
-          <Input
-            id="upiid"
-            placeholder="........"
-            type="text"
-            value={upiID}
-            onChange={(e) => setupiID(e.target.value)}
-          />
-        </LabelInputContainer>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              placeholder="••••••••"
+              type="password"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="Number">number no.</Label>
+            <Input
+              id="Number"
+              placeholder="0000000"
+              type="text"
+              value={number}
+              onChange={(e) => setnumber(e.target.value)}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="UPI_id">UPI id</Label>
+            <Input
+              id="upiid"
+              placeholder="........"
+              type="text"
+              value={upiID}
+              onChange={(e) => setupiID(e.target.value)}
+            />
+          </LabelInputContainer>
 
-        <button
-          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-          type="submit"
-        >
-          Sign up &rarr;
-          <BottomGradient />
-        </button>
+          <button
+            className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+            type="submit"
+          >
+            Sign up &rarr;
+            <BottomGradient />
+          </button>
 
-        <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-      </form>
-    </div>
+          <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
+        </form>
+      </div>
     </div>
   );
 }

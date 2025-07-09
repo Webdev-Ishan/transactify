@@ -64,7 +64,7 @@ const router = useRouter();
             <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Services">
              
             </MenuItem>
-            <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Documents">
+            <MenuItem setActive={setActive} active={active} className="text-white text-xs" onclick={()=>router.push("/Profile")} item="Profile">
              
             </MenuItem>
             <MenuItem setActive={setActive} active={active} onclick={()=>router.push("/Contact")} className="text-white text-xs" item="Contact">

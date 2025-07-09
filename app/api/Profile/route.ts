@@ -3,13 +3,15 @@ import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
 
 export async function GET(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-
+ 
+  const token = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
+  console.log("Token in request:", token);
   if (!token || !token.id) {
     return NextResponse.json(
       {
         success: false,
         message: "Please login first",
+        token
       },
       {
         status: 401,
