@@ -61,7 +61,7 @@ const router = useRouter();
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-evenly">
           <Menu setActive={setActive}>
-            <MenuItem setActive={setActive} active={active} className="text-white text-xs" item="Services">
+            <MenuItem setActive={setActive} active={active} onclick={()=>router.push("/TransactionList")} className="text-white text-xs" item="Transaction">
              
             </MenuItem>
             <MenuItem setActive={setActive} active={active} className="text-white text-xs" onclick={()=>router.push("/Profile")} item="Profile">
@@ -92,6 +92,7 @@ const router = useRouter();
           <div className="flex flex-col space-y-2">
             <HoveredLink  onClick={()=>router.push("/")}>Transactify</HoveredLink>
             <HoveredLink  onClick={()=>router.push("/Profile")}>Profile</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/TransactionList")}>Transaction</HoveredLink>
             <HoveredLink  onClick={()=>router.push("/Contact")}>Contact Us</HoveredLink>
             <HoveredLink  onClick={()=>router.push("/FAQ")}>Frequently Asked Questions</HoveredLink>
             <HoveredLink  onClick={()=>router.push("/About")} >About Us</HoveredLink>
