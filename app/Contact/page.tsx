@@ -20,7 +20,7 @@ function Contact() {
   const { data: session, status } = useSession();
 
   React.useEffect(() => {
-    if (status !== "authenticated") {
+    if (status === "unauthenticated") {
       router.push("/");
     }
   }, [status, session]);
@@ -49,21 +49,29 @@ function Contact() {
       if (response.data && response.data.success) {
         toast.success("Submission successfull.");
         router.push("/");
-        settopic("");
-        setcontent("");
-      } else {
-        toast.error("Something went wrong.");
-        console.log(response.data);
-        settopic("");
-        setcontent("");
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-        console.log(error);
-        settopic("");
-        setcontent("");
+      if (axios.isAxiosError(error) && error.response) {
+        const status = error.response.status;
+
+        if (status === 411) {
+          toast.info("Form is already submitted.");
+        } else if (status === 404) {
+          toast.error("Please Register First.");
+          router.push("/register");
+        } else {
+          toast.error("Something went wrong");
+          console.log(error);
+        }
+      } else {
+        if (error instanceof Error) {
+          toast.error("Internal server Error");
+          console.log(error);
+        }
       }
+    } finally {
+      settopic("");
+      setcontent("");
     }
   };
   return (
