@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
           email: user.email,
           username: user.username, // include this only if it exists in your schema
           id: user.id,
+          balance: user.balance,
         },
         { status: 200 }
       );

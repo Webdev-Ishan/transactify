@@ -10,6 +10,7 @@ export const registerSchema = z.object({
   password: z.string().min(6),
   number: z.string().length(10),
   upiID: z.string().regex(/^[\w.-]+@[\w.-]+$/, "Invalid UPI ID format"),
+  balance: z.number(),
 });
 
 const salt = process.env.SALT;
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { username, email, password, number, upiID } = parsedBody.data;
+  const { username, email, password, number, upiID, balance } = parsedBody.data;
 
   try {
     const existingUser = await prisma.user.findFirst({
@@ -63,6 +64,7 @@ export async function POST(req: NextRequest) {
         number: newNumber,
         upiID,
         isVerified: false,
+        balance,
       },
     });
 

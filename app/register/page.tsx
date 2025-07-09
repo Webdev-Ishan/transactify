@@ -14,7 +14,12 @@ const registerSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters."),
   number: z.string().length(10, "Mobile number must be 10 digits."),
   upiID: z.string().regex(/^[\w.-]+@[\w.-]+$/, "Invalid UPI ID format"),
+  balance: z.number(),
 });
+
+const generateBalance = () => {
+  return Math.floor(Math.random() * 1000);
+};
 
 export function SignupFormDemo() {
   const router = useRouter(); // ✅ Don't destructure anything
@@ -25,19 +30,29 @@ export function SignupFormDemo() {
   const [number, setnumber] = useState("");
   const [upiID, setupiID] = useState("");
 
+  const balance = generateBalance();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const result = registerSchema.safeParse({
       email,
       username,
       password,
       number,
       upiID,
+      balance,
     });
 
     if (!result.success) {
       const errors = result.error.flatten().fieldErrors;
       toast.error(errors.username?.[0] || "Invalid input");
+      console.log(errors);
+      setemail("");
+      setpassword("");
+      setusername("");
+      setnumber("");
+      setupiID("");
       return;
     }
 
@@ -53,6 +68,7 @@ export function SignupFormDemo() {
         const status = error.response.status;
         if (status === 409) {
           toast.info("You are already registered, please login.");
+          router.push("/signin");
         } else {
           toast.error("Something went wrong. Please try again.");
         }

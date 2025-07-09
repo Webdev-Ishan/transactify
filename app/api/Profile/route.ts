@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
         username: true,
         email: true,
         upiID: true,
+        balance:true
       },
     });
 
@@ -71,6 +72,7 @@ export async function GET(req: NextRequest) {
           username: user.username,
           upiID: user.upiID,
           email: user.email,
+          balance:user.balance
         },
         transactions,
       },

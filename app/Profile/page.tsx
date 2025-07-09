@@ -19,6 +19,7 @@ type BackendResponse = {
     username: string;
     email: string;
     upiID: string;
+    balance: string;
   };
   transactions: transactionList[];
 };
@@ -37,6 +38,7 @@ function Profile() {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [upiID, setupiID] = useState("");
+  const [balance, setbalance] = useState("");
   const [transactions, settransactions] = useState<transactionList[]>([]);
 
   const fetchdata = async () => {
@@ -50,6 +52,7 @@ function Profile() {
         setemail(response.data.userinfo.email);
         setupiID(response.data.userinfo.upiID);
         settransactions(response.data.transactions.splice(0, 9));
+        setbalance(response.data.userinfo.balance);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -58,6 +61,7 @@ function Profile() {
         setusername("");
         setemail("");
         setupiID("");
+        setbalance("");
       }
     }
   };
@@ -95,6 +99,14 @@ function Profile() {
                 UPI ID:
               </span>
               <span className="font-semibold text-lg text-white">{upiID}</span>
+            </li>
+            <li className="flex justify-between mb-10 text-sm text-gray-700 dark:text-gray-300">
+              <span className="font-medium text-lg text-blue-600 ">
+                Account Balance:
+              </span>
+              <span className="font-semibold text-lg text-white">
+                {balance}
+              </span>
             </li>
           </ul>
         </div>

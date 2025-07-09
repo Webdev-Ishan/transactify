@@ -38,8 +38,6 @@ function InputOTPControlled() {
       });
 
       if (response.data?.success) {
-        toast.success("Verification successful. Logging you in...");
-
         // Sign in using credentials if email/password are returned
         await signIn("credentials", {
           email: response.data.email, // assume backend returns this
@@ -47,6 +45,7 @@ function InputOTPControlled() {
           id: response.data.id,
           redirect: false,
         });
+        toast.success("Verification successful. Logging you in...");
 
         router.push("/");
       }
@@ -57,6 +56,7 @@ function InputOTPControlled() {
         if (status === 409) {
           toast.error("Please Register first!");
           router.push("/register");
+          console.log(error);
         } else {
           toast.error("Something went wrong!");
           console.error("Unknown error:", error);
@@ -74,34 +74,43 @@ function InputOTPControlled() {
   };
 
   return (
-    <form onSubmit={handleOtpSubmit} className="space-y-6 mt-10 h-60 ">
-      <InputOTP maxLength={6} value={otp} onChange={(val) => setOtp(val)}>
-        <InputOTPGroup className="text-white">
-          <InputOTPSlot index={0} />
-          <InputOTPSlot index={1} />
-          <InputOTPSlot index={2} />
-          <InputOTPSlot index={3} />
-          <InputOTPSlot index={4} />
-          <InputOTPSlot index={5} />
-        </InputOTPGroup>
-      </InputOTP>
-
-      <div className="text-center text-white text-sm h-full">
-        {otp === "" ? (
-          <>Enter your one-time password.</>
-        ) : (
-          <>You entered: {otp}</>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md bg-black text-white py-2 font-medium hover:bg-slate-800  disabled:opacity-50"
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
+      <form
+        onSubmit={handleOtpSubmit}
+        className="w-full max-w-sm space-y-6 p-6 rounded-lg bg-black shadow-lg"
       >
-        {isSubmitting ? "Verifying..." : "Verify OTP"}
-      </button>
-    </form>
+        <h2 className="text-white text-xl font-semibold text-center">
+          Enter OTP
+        </h2>
+
+        <InputOTP maxLength={6} value={otp} onChange={(val) => setOtp(val)}>
+          <InputOTPGroup className="text-white justify-center gap-2">
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
+
+        <div className="text-center text-white text-sm">
+          {otp === "" ? (
+            <>Enter your one-time password.</>
+          ) : (
+            <>You entered: {otp}</>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full rounded-md bg-white text-black py-2 font-semibold hover:bg-gray-200 transition disabled:opacity-50"
+        >
+          {isSubmitting ? "Verifying..." : "Verify OTP"}
+        </button>
+      </form>
+    </div>
   );
 }
 
