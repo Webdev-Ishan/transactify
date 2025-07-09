@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
   try {
     // Get user info
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { id: userid },
       select: {
         id: true,

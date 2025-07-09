@@ -33,7 +33,7 @@ function Transactions() {
 
   const fetchdata = async () => {
     try {
-      const response = await axios.get<BackendResponse>(`/api/Profile`, {
+      const response = await axios.get<BackendResponse>(`/api/transaction`, {
         withCredentials: true,
       });
 
