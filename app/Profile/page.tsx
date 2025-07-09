@@ -1,9 +1,27 @@
-"use client"
+"use client";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+type transactionList = {
+  sender: string;
+  reciever: string;
+  amount: string;
+};
+
+type BackendResponse = {
+  success: boolean;
+  message?: string;
+  error?: string;
+  userinfo: {
+    username: string;
+    email: string;
+    upiID: string;
+  };
+  transactions: transactionList[];
+};
 
 function Profile() {
   const { data: session, status } = useSession();
@@ -11,18 +29,19 @@ function Profile() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-    router.push("/signin");
-    toast.info("Please login first.");
-  }
+      router.push("/signin");
+      toast.info("Please login first.");
+    }
   }, [session]);
 
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [upiID, setupiID] = useState("");
+  const [transactions, settransactions] = useState<transactionList[]>([]);
 
   const fetchdata = async () => {
     try {
-      const response = await axios.get(`/api/Profile`, {
+      const response = await axios.get<BackendResponse>(`/api/Profile`, {
         withCredentials: true,
       });
 
@@ -30,6 +49,7 @@ function Profile() {
         setusername(response.data.userinfo.username);
         setemail(response.data.userinfo.email);
         setupiID(response.data.userinfo.upiID);
+        settransactions(response.data.transactions.splice(0, 9));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -47,14 +67,14 @@ function Profile() {
   }, []);
 
   return (
-    <div className="w-full mt-4 h-auto p-4 flex justify-center items-center">
+    <div className="w-full mt-4 h-auto p-4 flex flex-col justify-center items-center">
       <div className="w-full mt-12 h-auto gap-6 flex flex-col justify-center items-center">
         <div className="w-full text-center pl-4 pr-4">
           <h1 className="font-bold text-4xl ">Personal Info</h1>
         </div>
 
-        <div className="w-full max-w-md  mx-auto p-6 bg-black rounded-2xl shadow-md border">
-          <h2 className="text-2xl font-semibold mb-10 text-white">
+        <div className="w-full max-w-md   mx-auto p-6 bg-black rounded-2xl shadow-md border">
+          <h2 className="text-2xl font-semibold text-center mb-10 text-white">
             Profile Info
           </h2>
           <ul className="space-y-3">
@@ -78,6 +98,45 @@ function Profile() {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="w-full mt-12 h-auto gap-6 flex flex-col justify-center rounded-xl items-center bg-black">
+        <ul className="space-y-3">
+          {transactions && transactions.length > 0 ? (
+            transactions.map((item, idx) => (
+              <React.Fragment key={idx}>
+                <li className="flex justify-between mb-10 text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium text-lg text-blue-600">
+                    Sended by:
+                  </span>
+                  <span className="font-semibold text-lg text-white">
+                    {item.sender}
+                  </span>
+                </li>
+                <li className="flex justify-between mb-10 text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium text-lg text-blue-600">
+                    Sended to:
+                  </span>
+                  <span className="font-semibold text-lg text-white">
+                    {item.reciever}
+                  </span>
+                </li>
+                <li className="flex justify-between mb-10 text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium text-lg text-blue-600">
+                    Amount:
+                  </span>
+                  <span className="font-semibold text-lg text-white">
+                    {item.amount}
+                  </span>
+                </li>
+              </React.Fragment>
+            ))
+          ) : (
+            <div className="text-center text-gray-500 dark:text-gray-400 py-6">
+              No transactions found.
+            </div>
+          )}
+        </ul>
       </div>
     </div>
   );

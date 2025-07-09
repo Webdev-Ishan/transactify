@@ -3,7 +3,6 @@ import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
 
 export async function GET(req: NextRequest) {
- 
   const token = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
   console.log("Token in request:", token);
   if (!token || !token.id) {
@@ -11,7 +10,7 @@ export async function GET(req: NextRequest) {
       {
         success: false,
         message: "Please login first",
-        token
+        token,
       },
       {
         status: 401,
@@ -68,8 +67,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        userinfo: user,
-        transactions, // will be [] if none exist
+        userinfo: {
+          username: user.username,
+          upiID: user.upiID,
+          email: user.email,
+        },
+        transactions,
       },
       {
         status: 200,
