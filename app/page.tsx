@@ -1,9 +1,14 @@
 "use client";
-import BackgroundBeam from "@/components/BackgroundBeam";
 import { TextGenerateEffectUse } from "@/components/TextEffect";
 import { useRouter } from "next/navigation";
 import { ColourfulTextDemo } from "@/components/colortext";
 import { InfiniteMovingCardsDemo } from "@/components/InfiniteCrds";
+import dynamic from "next/dynamic";
+
+const BackgroundBeam = dynamic(() => import("@/components/BackgroundBeam"), {
+  ssr: false,
+});
+
 export default function Home() {
   const router = useRouter();
   return (
