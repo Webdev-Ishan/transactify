@@ -22,7 +22,7 @@ function Navbar({ className }: { className?: string }) {
 const router = useRouter();
   return (
     <div className={cn("fixed top-3 inset-x-0 w-full z-50", className)}>
-      <nav className="flex items-center border border-white hover:shadow hover:shadow-blue-500 mr-2 transition duration-300 justify-between w-[98%]  mr-2 ml-2  px-4 md:px-8 bg-white rounded-4xl dark:bg-black shadow">
+      <nav className="flex items-center border border-white hover:shadow hover:shadow-blue-500  transition duration-300 justify-between w-[98%]  mr-4 ml-2  px-4 md:px-8 bg-white rounded-4xl dark:bg-black shadow ">
         <div className="flex items-center">
           <h1 onClick={()=>router.push("/")} className="text-blue-500 cursor-pointer text-xl font-sans md:text-lg font-bold">
             Transactify
@@ -30,7 +30,7 @@ const router = useRouter();
         </div>
         {/* Hamburger button for mobile */}
         <button
-          className="md:hidden p-2 rounded focus:outline-none"
+          className="md:hidden p-2  rounded focus:outline-none"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
@@ -90,11 +90,12 @@ const router = useRouter();
       {mobileOpen && (
         <div className="md:hidden bg-white dark:bg-black shadow px-4 py-2">
           <div className="flex flex-col space-y-2">
-            <HoveredLink href="/web-dev" onClick={()=>router.push("/")}>Transactify</HoveredLink>
-            <HoveredLink href="/interface-design" onClick={()=>router.push("/Contact")}>Contact Us</HoveredLink>
-            <HoveredLink href="/seo" onClick={()=>router.push("/FAQ")}>Frequently Asked Questions</HoveredLink>
-            <HoveredLink href="/branding" onClick={()=>router.push("/About")} >About Us</HoveredLink>
-            <HoveredLink href="/branding" onClick={()=>router.push("/signin")} >Sign In</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/")}>Transactify</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/Profile")}>Profile</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/Contact")}>Contact Us</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/FAQ")}>Frequently Asked Questions</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/About")} >About Us</HoveredLink>
+            <HoveredLink  onClick={()=>router.push("/signin")} >Sign In</HoveredLink>
             
           </div>
         </div>

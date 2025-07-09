@@ -75,7 +75,7 @@ function Contact() {
     }
   };
   return (
-    <div className="w-full h-auto flex mt-10 justify-center items-center mb-4">
+    <div className="w-full h-auto pt-12 flex flex-col items-center justify-center overflow-x-hidden">
       <div className="shadow-input mt-10  ml-2 mr-2 bg-black   w-full max-w-md rounded-none  border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
         <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
           Welcome to Transactify

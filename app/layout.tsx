@@ -27,20 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="w-full h-auto    items-center    dark">
-          {" "}
-          <Providers>
-            <Navbar  />
-             
-            {children}
-          
-             </Providers>
-             <Footer/>
-        </div>
-        <ToastContainer
+  <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
+    <Providers>
+      <div className="min-h-screen w-full relative flex flex-col dark">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -49,7 +43,9 @@ export default function RootLayout({
         pauseOnHover
         theme="dark"
       />
-      </body>
-    </html>
+    </Providers>
+  </body>
+</html>
+
   );
 }
