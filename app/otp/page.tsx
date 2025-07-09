@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import axios from "axios";
 import {
   InputOTP,
@@ -13,19 +13,12 @@ import { toast } from "react-toastify";
 
 function InputOTPControlled() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+
   const [otp, setOtp] = React.useState("");
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
-
-  React.useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-      toast.info("You are already logged in!!!");
-    }
-  }, [session, status]);
 
   // ✅ Handle OTP verification
   const handleOtpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -56,12 +49,24 @@ function InputOTPControlled() {
         });
 
         router.push("/");
-      } else {
-        toast.error(response.data?.message || "Invalid OTP");
       }
     } catch (error) {
-      toast.error("Oops! Verification failed.");
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const status = error.response.status;
+
+        if (status === 409) {
+          toast.error("Please Register first!");
+          router.push("/register");
+        } else {
+          toast.error("Something went wrong!");
+          console.error("Unknown error:", error);
+        }
+      } else {
+        if (error instanceof Error) {
+          toast.error("Unexpected Error Occurred!");
+          console.error("Unknown error:", error);
+        }
+      }
     } finally {
       setIsSubmitting(false);
       setOtp("");
