@@ -38,7 +38,7 @@ export default function CreateOrderPage() {
 
       // Redirect to Razorpay checkout verify page
       router.push(
-        `/verify-payment?order_id=${order.id}&senderid=${senderid}&receiverid=${recieverid}&amount=${amount}`
+        `/Verify?order_id=${order.id}&senderid=${senderid}&receiverid=${recieverid}&amount=${amount}`
       );
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

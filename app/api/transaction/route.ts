@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     const existReciever = await prisma.user.findFirst({
       where: {
-        number: parsedbody.data.Number.toString(),
+        number:"+91"+ parsedbody.data.Number.toString(),
       },
     });
 

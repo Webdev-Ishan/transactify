@@ -46,7 +46,7 @@ export default function VerifyPaymentPage() {
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              router.push("/dashboard"); // or any success page
+              router.push("/Profile"); // or any success page
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
