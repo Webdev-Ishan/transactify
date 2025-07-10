@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
+
 const registerSchema = z.object({
   email: z.string().email("Invalid email address."),
   password: z.string().min(6, "Password must be at least 6 characters."),
@@ -112,6 +113,18 @@ export function SignupFormDemo() {
 
           <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
         </form>
+        <button
+          className="group/btn relative transition duration-300 hover:shadow-blue-500 block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          onClick={() => signIn("google",{callbackUrl:"/"})}
+        >
+           Login with Google
+        </button>
+        <button
+          className="group/btn mt-3 transition duration-300 hover:shadow-blue-500 relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          onClick={() => signIn("github",{callbackUrl:"/"})}
+        >
+          Login with Github
+        </button>
       </div>
     </div>
   );
