@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
         {
           success: false,
           message: "Please register first",
+          userid
         },
         { status: 404 }
       );

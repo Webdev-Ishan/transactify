@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
             email: existingUser.email,
             username: existingUser.username || null,
             name: existingUser.username || "", // required by DefaultUser
-            success:true
+            success: true,
           } as User;
         } catch (error) {
           if (error instanceof Error) {
@@ -87,8 +87,20 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (user) {
-        token.id = user.id;
-        token.name = user.name;
+        const dbUser = await prisma.user.findUnique({
+          where: {
+            email: user.email!,
+          },
+        });
+
+        if (!dbUser) {
+          // Add a custom flag to token
+          token.registerRedirect = true;
+          return token;
+        }
+
+        token.id = dbUser.id.toString();
+        token.name = dbUser.username;
       }
       return token;
     },
