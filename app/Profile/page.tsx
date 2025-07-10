@@ -104,8 +104,8 @@ function Profile() {
               <span className="font-medium text-lg text-blue-600 ">
                 Account Balance:
               </span>
-              <span className="font-semibold text-lg text-white">
-                {balance}
+              <span className="font-semibold text-lg text-green-400">
+                ${balance}
               </span>
             </li>
           </ul>
