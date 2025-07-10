@@ -1,10 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
+import razorpay from "@/lib/razorpayConfig";
+import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
+export const transactionSchema = z.object({
+  amount: z.string(),
+  Number: z.number(),
+});
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
+  const data = await req.json();
+  const parsedbody = transactionSchema.safeParse(data);
+
+  if (!parsedbody.success) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: parsedbody.error.flatten(),
+      },
+      {
+        status: 403,
+      }
+    );
+  }
+
   const token = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
-  console.log("Token in request:", token);
+
   if (!token || !token.id) {
     return NextResponse.json(
       {
@@ -21,68 +42,90 @@ export async function GET(req: NextRequest) {
   const userid = Number(token.id);
 
   try {
-    // Get user info
-    const user = await prisma.user.findFirst({
-      where: { id: userid },
-      select: {
-        id: true,
-        username: true,
-        email: true,
-        upiID: true,
+    const existSender = await prisma.user.findUnique({
+      where: {
+        id: userid,
       },
     });
 
-    if (!user) {
+    if (!existSender) {
       return NextResponse.json(
         {
           success: false,
           message: "Please register first",
+          token,
+          
         },
-        { status: 404 }
+        {
+          status: 404,
+        }
       );
     }
 
-    // Get transactions (sent or received)
-    const transactions = await prisma.transaction.findMany({
+    const existReciever = await prisma.user.findFirst({
       where: {
-        OR: [{ senderId: userid }, { receiverId: userid }],
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        sender: {
-          select: {
-            username: true,
-          },
-        },
-        receiver: {
-          select: {
-            username: true,
-          },
-        },
+        number: parsedbody.data.Number.toString(),
       },
     });
+
+    if (!existReciever) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Reciever not found",
+          token,
+          existReciever
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    const amount = Number(parsedbody.data.amount);
+
+    const options = {
+      amount: amount * 100, // Razorpay expects the amount in paise
+      currency: "INR",
+      receipt: `receipt_${Date.now()}`,
+    };
+
+    const order = await razorpay.orders.create(options);
+
+    if (!order) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Order canceled",
+          token,
+        },
+        {
+          status: 409,
+        }
+      );
+    }
 
     return NextResponse.json(
       {
         success: true,
-        transactions,
+        senderid: existSender.id,
+        recieverid: existReciever.id,
+        amount,
+        order,
       },
-      {
-        status: 200,
-      }
+      { status: 200 }
     );
-  } catch (err) {
-    console.error("Profile fetch failed:", err);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Internal server error",
-      },
-      {
-        status: 500,
-      }
-    );
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: error.message,
+        },
+        {
+          status: 500,
+        }
+      );
+    }
   }
 }
