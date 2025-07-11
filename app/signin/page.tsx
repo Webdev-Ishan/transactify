@@ -53,11 +53,6 @@ export default function SignupFormDemo() {
         toast.success("LoggedIn successfull.");
         setemail("");
         setpassword("");
-      } else if (response?.ok === false) {
-        toast.error("check error");
-       console.log(response.error);
-        setemail("");
-        setpassword("");
       } else {
         toast.error("Something went wrong.");
         console.log(response?.error);
