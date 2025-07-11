@@ -71,6 +71,7 @@ export default function SignupFormDemo() {
           router.push("/signin");
         } else {
           toast.error("Something went wrong. Please try again.");
+          console.log(error);
         }
       } else {
         if (error instanceof Error) {
@@ -187,5 +188,3 @@ const LabelInputContainer = ({
     </div>
   );
 };
-
-
