@@ -43,7 +43,7 @@ export default function Profile() {
 
   const fetchdata = async () => {
     try {
-      const response = await axios.get<BackendResponse>(`/api/profile`, {
+      const response = await axios.get<BackendResponse>(`/api/profilepage`, {
         withCredentials: true,
       });
 

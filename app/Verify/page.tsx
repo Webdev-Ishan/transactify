@@ -35,7 +35,7 @@ export default function VerifyPaymentPage() {
         order_id: orderId,
         handler: async function (response: RazorpayCheckoutResponse) {
           try {
-            const verifyRes = await axios.post("/api/verify", {
+            const verifyRes = await axios.post("/api/verifyorder", {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
