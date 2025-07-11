@@ -54,8 +54,7 @@ export default function SignupFormDemo() {
         setemail("");
         setpassword("");
       } else if (response?.ok === false) {
-        toast.error("Register yourself please");
-        router.push("/register");
+       console.log(response.error);
         setemail("");
         setpassword("");
       } else {
