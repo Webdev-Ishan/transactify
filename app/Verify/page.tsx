@@ -73,7 +73,12 @@ export default function VerifyPaymentPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <h1 onClick={()=>router.push("/Profile")}  className="text-xl rounded-lg py-2 px-4 bg-slate-700 border-2  animate-pulse">Back to Profile</h1>
+      <h1
+        onClick={() => router.push("/Profile")}
+        className="text-xl rounded-lg py-2 px-4 bg-slate-700 border-2  animate-pulse"
+      >
+        Back to Profile
+      </h1>
     </div>
   );
 }

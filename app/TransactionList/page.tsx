@@ -58,6 +58,9 @@ function Transactions() {
 
   return (
     <div className="w-full mt-4 h-auto  p-8 flex flex-col  items-center">
+      <h1 className="text-center text-4xl text-black  mt-6">
+        Transaction History
+      </h1>
       <div className="w-full mt-12 h-auto gap-6 p-8 flex flex-col  rounded-xl items-center ">
         <ul className="space-y-3 w-full">
           {transactions && transactions.length > 0 ? (

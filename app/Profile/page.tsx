@@ -112,13 +112,12 @@ function Profile() {
         </div>
       </div>
 
-<button
+      <button
         onClick={() => router.push("/transaction")}
         className="px-2 py-2 w-24 m-8 rounded-md border-2 hover:border-black font-bold  bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200"
       >
         Pay
       </button>
-
 
       <div className="w-full  h-auto  p-4 flex flex-col  items-center">
         <div className="w-full mt-12 h-auto gap-6 p-8 flex flex-col  rounded-xl items-center ">

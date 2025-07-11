@@ -59,4 +59,3 @@ const testimonials = [
     title: "Fitness Coach",
   },
 ];
-

@@ -46,9 +46,7 @@ function About() {
         </div>
       </section>
       <div className="w-full h-auto p-4 flex justify-center gap-2 md:flex-row flex-col text-center items-center">
-        <div className="text-6xl text-white font-bold ">
-          Check Out Our Work
-        </div>
+        <div className="text-6xl text-white font-bold ">Check Out Our Work</div>
         <CarouselDemo />
       </div>
     </div>

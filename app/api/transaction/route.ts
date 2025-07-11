@@ -50,13 +50,12 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    if (!existSender  ) {
+    if (!existSender) {
       return NextResponse.json(
         {
           success: false,
           message: "Please register first",
           token,
-          
         },
         {
           status: 404,
@@ -64,15 +63,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-
-
-     if (existSender.balance <= amount-100  ) {
+    if (existSender.balance <= amount - 100) {
       return NextResponse.json(
         {
           success: false,
           message: "Insufficent Balance.",
           token,
-          
         },
         {
           status: 403,
@@ -82,7 +78,7 @@ export async function POST(req: NextRequest) {
 
     const existReciever = await prisma.user.findFirst({
       where: {
-        number:"+91"+ parsedbody.data.Number.toString(),
+        number: "+91" + parsedbody.data.Number.toString(),
       },
     });
 
@@ -92,14 +88,13 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "Reciever not found",
           token,
-          existReciever
+          existReciever,
         },
         {
           status: 404,
         }
       );
     }
-
 
     const options = {
       amount: amount * 100, // Razorpay expects the amount in paise

@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
         username: true,
         email: true,
         upiID: true,
-        balance:true
+        balance: true,
       },
     });
 
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
         {
           success: false,
           message: "Please register first",
-          userid
+          userid,
         },
         { status: 404 }
       );
@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
             username: true,
           },
         },
-        receiver : {
+        receiver: {
           select: {
             username: true,
           },
@@ -73,7 +73,7 @@ export async function GET(req: NextRequest) {
           username: user.username,
           upiID: user.upiID,
           email: user.email,
-          balance:user.balance
+          balance: user.balance,
         },
         transactions,
       },
