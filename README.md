@@ -5,7 +5,7 @@
 
 
 
-🚀 Live Demo
+### 🚀 Live Demo
 
 
 
@@ -13,7 +13,7 @@
 
 
 
-🧰 Tech Stack
+### 🧰 Tech Stack
 
 
 
@@ -36,7 +36,7 @@ Deployment: Vercel
 
 
 
-🔑 Features
+### 🔑 Features
 
 ✅ Secure authentication & user sessions
 
@@ -55,7 +55,7 @@ Deployment: Vercel
 
 
 
-📸 Screenshots
+### 📸 Screenshots
 
 
 
@@ -69,7 +69,7 @@ Deployment: Vercel
 
 
 
-📦 Installation
+### 📦 Installation
 
     ``` git bash
 
@@ -84,7 +84,7 @@ Deployment: Vercel
 
 
 
-🔐 Environment Setup
+### 🔐 Environment Setup
 
 ```
   DATABASE_URL=your postgress url
@@ -106,7 +106,7 @@ Deployment: Vercel
 
 
 
-💻 Run Locally
+### 💻 Run Locally
 
 ```
 npx prisma generate
@@ -120,7 +120,7 @@ npm run dev
 
 
 
-🤝 Contributing
+### 🤝 Contributing
 
 1 Fork this repo
 
@@ -129,6 +129,8 @@ npm run dev
 3 Commit changes
 
 4 Open a PR
+
+
 
 🧑‍💼 Author
 
