@@ -46,7 +46,7 @@ export default function VerifyPaymentPage() {
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              router.push("/Profile"); // or any success page
+              // or any success page
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
@@ -55,6 +55,8 @@ export default function VerifyPaymentPage() {
               console.error(error);
               alert("❌ Error verifying payment");
             }
+          } finally {
+            router.push("/Profile");
           }
         },
         theme: {
@@ -71,7 +73,7 @@ export default function VerifyPaymentPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <h1 className="text-xl animate-pulse">Opening Razorpay Checkout...</h1>
+      <h1 onClick={()=>router.push("/Profile")}  className="text-xl rounded-lg py-2 px-4 bg-slate-700 border-2  animate-pulse">Back to Profile</h1>
     </div>
   );
 }

@@ -41,6 +41,8 @@ export async function POST(req: NextRequest) {
 
   const userid = Number(token.id);
 
+  const amount = Number(parsedbody.data.amount);
+
   try {
     const existSender = await prisma.user.findUnique({
       where: {
@@ -48,7 +50,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    if (!existSender) {
+    if (!existSender  ) {
       return NextResponse.json(
         {
           success: false,
@@ -58,6 +60,22 @@ export async function POST(req: NextRequest) {
         },
         {
           status: 404,
+        }
+      );
+    }
+
+
+
+     if (existSender.balance <= amount-100  ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Insufficent Balance.",
+          token,
+          
+        },
+        {
+          status: 403,
         }
       );
     }
@@ -82,7 +100,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const amount = Number(parsedbody.data.amount);
 
     const options = {
       amount: amount * 100, // Razorpay expects the amount in paise
