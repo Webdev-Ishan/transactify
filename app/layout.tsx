@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import { Suspense } from "react";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -40,7 +42,9 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen w-full relative flex flex-col dark">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <Suspense>{children}</Suspense>
+            </main>
             <Footer />
           </div>
           <ToastContainer
