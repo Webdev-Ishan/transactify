@@ -55,7 +55,7 @@ export default function SignupFormDemo() {
         setpassword("");
       } else {
         toast.error("Something went wrong.");
-        console.log(response?.error);
+        console.log(response);
         setemail("");
         setpassword("");
       }
