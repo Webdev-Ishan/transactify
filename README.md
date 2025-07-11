@@ -4,31 +4,31 @@
 
 🧰 Tech Stack
 
-    Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
+Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
 
-    Backend: Next.js API
+Backend: Next.js API
 
-    Database: PostgreSQL with Prisma ORM
+Database: PostgreSQL with Prisma ORM
 
-    Auth: NextAuth
+Auth: NextAuth
 
-    Payments: Razorpay SDK (test mode)
+Payments: Razorpay SDK (test mode)
 
-    Deployment: Vercel
+Deployment: Vercel
 
 🔑 Features
 
-    ✅ Secure authentication & user sessions
+✅ Secure authentication & user sessions
 
-    ✅ Send/receive money using UPI ID or phone number
+✅ Send/receive money using UPI ID or phone number
 
-    ✅ Razorpay payment integration
+✅ Razorpay payment integration
 
-    ✅ Transaction history and logs
+✅ Transaction history and logs
 
-    ✅ Responsive UI with Tailwind CSS
+✅ Responsive UI with Tailwind CSS
 
-    ✅ Error handling and toast notifications
+✅ Error handling and toast notifications
 
 📸 Screenshots
 
