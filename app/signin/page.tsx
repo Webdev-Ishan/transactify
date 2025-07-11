@@ -47,7 +47,7 @@ export default function SignupFormDemo() {
         email: result.data.email, // assume backend returns this
         password: result.data.password,
         redirect: true,
-        callbackUrl: "/",
+        callbackUrl: "/Profile",
       });
 
       if (response?.ok) {
