@@ -1,11 +1,11 @@
-### 📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
+## 📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
 
 
 ----
 
 
 
-### 🚀 Live Demo
+## 🚀 Live Demo
 
 
 
@@ -13,52 +13,21 @@
 
 
 
-### 🧰 Tech Stack
+## 🧰 Tech Stack
 
 
 
-## Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
+### Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
 
-## Backend: Next.js API
+### Backend: Next.js API
 
-## Database: PostgreSQL with Prisma ORM
+### Database: PostgreSQL with Prisma ORM
 
-## Auth: NextAuth
+### Auth: NextAuth
 
-## Payments: Razorpay SDK (test mode)
+### Payments: Razorpay SDK (test mode)
 
-## Deployment: Vercel
-
-
-
-
----
-
-
-
-### 🔑 Features
-
-## ✅ Secure authentication & user sessions
-
-## ✅ Send/receive money using UPI ID or phone number
-
-## ✅ Razorpay payment integration
-
-## ✅ Transaction history and logs
-
-## ✅ Responsive UI with Tailwind CSS
-
-## ✅ Error handling and toast notifications
-
-
----
-
-
-
-### 📸 Screenshots
-
-
-
+### Deployment: Vercel
 
 
 
@@ -67,9 +36,40 @@
 
 
 
+## 🔑 Features
+
+### ✅ Secure authentication & user sessions
+
+### ✅ Send/receive money using UPI ID or phone number
+
+### ✅ Razorpay payment integration
+
+### ✅ Transaction history and logs
+
+### ✅ Responsive UI with Tailwind CSS
+
+### ✅ Error handling and toast notifications
 
 
-### 📦 Installation
+---
+
+
+
+## 📸 Screenshots
+
+
+
+
+
+
+
+---
+
+
+
+
+
+## 📦 Installation
 
     ``` git bash
 
@@ -84,7 +84,7 @@
 
 
 
-### 🔐 Environment Setup
+## 🔐 Environment Setup
 
 ```
   DATABASE_URL=your postgress url
@@ -106,7 +106,7 @@
 
 
 
-### 💻 Run Locally
+## 💻 Run Locally
 
 ```
 npx prisma generate
@@ -120,19 +120,19 @@ npm run dev
 
 
 
-### 🤝 Contributing
+## 🤝 Contributing
 
-## 1 Fork this repo
+### 1 Fork this repo
 
-## 2 Create a feature branch
+### 2 Create a feature branch
 
-## 3 Commit changes
+### 3 Commit changes
 
-## 4 Open a PR
+### 4 Open a PR
 
 ---
 
 
-### 🧑‍💼 Author
+## 🧑‍💼 Author
 
-## Ishan Saini
+### Ishan Saini
