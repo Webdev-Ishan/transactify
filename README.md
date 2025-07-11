@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
 
-## Getting Started
+🚀 Live Demo
 
-First, run the development server:
+🧰 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
+
+    Backend: Next.js API
+
+    Database: PostgreSQL with Prisma ORM
+
+    Auth: NextAuth
+
+    Payments: Razorpay SDK (test mode)
+
+    Deployment: Vercel
+
+🔑 Features
+
+    ✅ Secure authentication & user sessions
+
+    ✅ Send/receive money using UPI ID or phone number
+
+    ✅ Razorpay payment integration
+
+    ✅ Transaction history and logs
+
+    ✅ Responsive UI with Tailwind CSS
+
+    ✅ Error handling and toast notifications
+
+📸 Screenshots
+
+📦 Installation
+
+    ``` git bash
+
+     git clone https://github.com/Webdev-Ishan/transactify.git
+     cd transactify
+     npm install
+
+    ```
+
+🔐 Environment Setup
+
+```
+  DATABASE_URL=your postgress url
+  NODE_ENV= "dev" || "production
+  SALT= your salt for bcrypt
+  RESEND_API_KEY=your resend api key
+  NEXT_AUTH_SECRET= your auth secret
+  GOOGLE_CLIENT_ID= google client id
+  GOOGLE_CLIENT_SECRET= google client secret
+  GITHUB_ID= github id
+  GITHUB_SECRET= github secret
+   RAZORPAY_ID= your razorpay id
+   RAZORPAY_SECRET= your razorpay secret
+  NEXT_PUBLIC_RAZORPAY_KEY_ID=  your razorpay id(same)
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💻 Run Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npx prisma generate
+npx prisma db push
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+1 Fork this repo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2 Create a feature branch
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3 Commit changes
 
-## Deploy on Vercel
+4 Open a PR
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🧑‍💼 Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ishan Saini
