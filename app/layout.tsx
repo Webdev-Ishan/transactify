@@ -43,7 +43,7 @@ export default function RootLayout({
           <div className="min-h-screen w-full relative flex flex-col dark">
             <Navbar />
             <main className="flex-1">
-              <Suspense fallback={null}>{children}</Suspense>
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
             </main>
             <Footer />
           </div>
