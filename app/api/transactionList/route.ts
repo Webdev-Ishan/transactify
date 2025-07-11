@@ -4,7 +4,7 @@ import { prisma } from "@/lib/DB";
 
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
-  console.log("Token in request:", token);
+  
   if (!token || !token.id) {
     return NextResponse.json(
       {

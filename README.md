@@ -130,8 +130,9 @@ npm run dev
 
 4 Open a PR
 
+---
 
 
-🧑‍💼 Author
+### 🧑‍💼 Author
 
 Ishan Saini

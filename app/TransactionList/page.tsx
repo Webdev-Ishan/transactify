@@ -41,7 +41,7 @@ function Transactions() {
       );
 
       if (response.data && response.data.success) {
-        console.log(transactions);
+        
         settransactions(response.data.transactions);
       }
     } catch (error) {
