@@ -1,4 +1,4 @@
-📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
+### 📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
 
 
 ----
@@ -17,17 +17,17 @@
 
 
 
-Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
+## Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
 
-Backend: Next.js API
+## Backend: Next.js API
 
-Database: PostgreSQL with Prisma ORM
+## Database: PostgreSQL with Prisma ORM
 
-Auth: NextAuth
+## Auth: NextAuth
 
-Payments: Razorpay SDK (test mode)
+## Payments: Razorpay SDK (test mode)
 
-Deployment: Vercel
+## Deployment: Vercel
 
 
 
@@ -38,17 +38,17 @@ Deployment: Vercel
 
 ### 🔑 Features
 
-✅ Secure authentication & user sessions
+## ✅ Secure authentication & user sessions
 
-✅ Send/receive money using UPI ID or phone number
+## ✅ Send/receive money using UPI ID or phone number
 
-✅ Razorpay payment integration
+## ✅ Razorpay payment integration
 
-✅ Transaction history and logs
+## ✅ Transaction history and logs
 
-✅ Responsive UI with Tailwind CSS
+## ✅ Responsive UI with Tailwind CSS
 
-✅ Error handling and toast notifications
+## ✅ Error handling and toast notifications
 
 
 ---
@@ -122,17 +122,17 @@ npm run dev
 
 ### 🤝 Contributing
 
-1 Fork this repo
+## 1 Fork this repo
 
-2 Create a feature branch
+## 2 Create a feature branch
 
-3 Commit changes
+## 3 Commit changes
 
-4 Open a PR
+## 4 Open a PR
 
 ---
 
 
 ### 🧑‍💼 Author
 
-Ishan Saini
+## Ishan Saini
