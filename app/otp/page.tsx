@@ -11,7 +11,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
-function InputOTPControlled() {
+export default function InputOTPControlled() {
   const router = useRouter();
 
   const [otp, setOtp] = React.useState("");
@@ -114,4 +114,3 @@ function InputOTPControlled() {
   );
 }
 
-export default InputOTPControlled;

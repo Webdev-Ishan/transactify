@@ -24,7 +24,7 @@ type BackendResponse = {
   transactions: transactionList[];
 };
 
-function Profile() {
+export default function Profile() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -163,4 +163,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+

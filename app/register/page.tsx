@@ -21,7 +21,7 @@ const generateBalance = () => {
   return Math.floor(Math.random() * 1000);
 };
 
-export function SignupFormDemo() {
+export default function SignupFormDemo() {
   const router = useRouter(); // ✅ Don't destructure anything
 
   const [username, setusername] = useState("");
@@ -188,4 +188,4 @@ const LabelInputContainer = ({
   );
 };
 
-export default SignupFormDemo;
+

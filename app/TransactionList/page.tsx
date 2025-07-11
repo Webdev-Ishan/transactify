@@ -18,7 +18,7 @@ type BackendResponse = {
   transactions: transactionList[];
 };
 
-function Transactions() {
+export default function Transactions() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -111,4 +111,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+

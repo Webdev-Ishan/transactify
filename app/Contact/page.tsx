@@ -14,7 +14,7 @@ const registerSchema = z.object({
   content: z.string().min(6, "content must be at least 6 characters."),
 });
 
-function Contact() {
+export default function Contact() {
   const router = useRouter(); // ✅ Don't destructure anything
 
   const { data: session, status } = useSession();
@@ -145,4 +145,4 @@ const LabelInputContainer = ({
   );
 };
 
-export default Contact;
+

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-function page() {
+export default function page() {
   return (
     <div className="bg-black w-full h-auto border-b border-white">
       <section className="py-24">
@@ -228,4 +228,4 @@ function page() {
   );
 }
 
-export default page;
+

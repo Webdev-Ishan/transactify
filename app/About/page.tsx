@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import about from "../../public/about.jpg";
 import { CarouselDemo } from "@/components/Carousal";
-function About() {
+export default function About() {
   const router = useRouter();
   return (
     <div className="w-full h-auto bg-black ">
@@ -53,4 +53,4 @@ function About() {
   );
 }
 
-export default About;
+

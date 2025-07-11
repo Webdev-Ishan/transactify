@@ -15,7 +15,7 @@ const registerSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters."),
 });
 
-export function SignupFormDemo() {
+export default function SignupFormDemo() {
   const router = useRouter(); // ✅ Don't destructure anything
 
   const { data: session, status } = useSession();
@@ -172,4 +172,4 @@ const LabelInputContainer = ({
   );
 };
 
-export default SignupFormDemo;
+
