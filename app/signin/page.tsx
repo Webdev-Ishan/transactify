@@ -46,8 +46,7 @@ export default function SignupFormDemo() {
       const response = await signIn("credentials", {
         email: result.data.email, // assume backend returns this
         password: result.data.password,
-        redirect: true,
-        callbackUrl: "/Profile",
+        redirect:false
       });
 
       if (response?.ok) {
