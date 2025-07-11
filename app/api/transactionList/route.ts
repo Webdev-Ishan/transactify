@@ -53,11 +53,13 @@ export async function GET(req: NextRequest) {
       include: {
         sender: {
           select: {
+            email: true,
             username: true,
           },
         },
         receiver: {
           select: {
+            email: true,
             username: true,
           },
         },

@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
             username: true,
           },
         },
-        receiver: {
+        receiver : {
           select: {
             username: true,
           },

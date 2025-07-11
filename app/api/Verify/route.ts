@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
         Status: "COMPLETED",
         senderId,
         receiverId,
+        completedAt: Date.now().toString(),
         razorpayID: razorpay_payment_id,
       },
     }),
@@ -62,12 +63,12 @@ export async function POST(req: NextRequest) {
     }),
   ]);
 
-      await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: sender.email,
-      subject: "Transaction alert",
-       text:`A transaction from your account has been done to ${receiver.number} of amount ${amount}`
-    });
+  await resend.emails.send({
+    from: "Acme <onboarding@resend.dev>",
+    to: sender.email,
+    subject: "Transaction alert",
+    text: `A transaction from your account has been done to ${receiver.number} of amount ${amount}`,
+  });
 
   return NextResponse.json({ success: true, transaction });
 }
