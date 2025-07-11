@@ -44,7 +44,11 @@ Deployment: Vercel
 
 ![Homepage](./screenshots/home1.png)
 
+---
+
 ![Homepage](./screenshots/home2.png)
+
+---
 
 ![Homepage](./screenshots/home3.png)
 
@@ -69,6 +73,8 @@ Deployment: Vercel
 ### 🏠 About
 
 ![About](./screenshots/About1.png)
+
+---
 
 ![About](./screenshots/About2.png)
 
