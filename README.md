@@ -1,73 +1,80 @@
 ## 📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
 
-
-----
-
-
+---
 
 ## 🚀 Live Demo
 
-
-
-----
-
-
+---
 
 ## 🧰 Tech Stack
 
+Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
 
+Backend: Next.js API
 
-### Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
+Database: PostgreSQL with Prisma ORM
 
-### Backend: Next.js API
+Auth: NextAuth
 
-### Database: PostgreSQL with Prisma ORM
+Payments: Razorpay SDK (test mode)
 
-### Auth: NextAuth
-
-### Payments: Razorpay SDK (test mode)
-
-### Deployment: Vercel
-
-
-
+Deployment: Vercel
 
 ---
-
-
 
 ## 🔑 Features
 
-### ✅ Secure authentication & user sessions
+✅ Secure authentication & user sessions
 
-### ✅ Send/receive money using UPI ID or phone number
+✅ Send/receive money using UPI ID or phone number
 
-### ✅ Razorpay payment integration
+✅ Razorpay payment integration
 
-### ✅ Transaction history and logs
+✅ Transaction history and logs
 
-### ✅ Responsive UI with Tailwind CSS
+✅ Responsive UI with Tailwind CSS
 
-### ✅ Error handling and toast notifications
-
+✅ Error handling and toast notifications
 
 ---
-
-
 
 ## 📸 Screenshots
 
+### 🏠 Homepage
 
+![Homepage](./screenshots/home1.png)
 
+![Homepage](./screenshots/home2.png)
 
+![Homepage](./screenshots/home3.png)
 
+### 🏠 Transaction History
 
+![TransacionList](./screenshots/transactionList.png)
+
+### 🏠 Profile
+
+![Profile](./screenshots/profile.png)
+
+### 🏠 ContactUS
+
+![Contact](./screenshots/contactForm.png)
 
 ---
 
+### 🏠 FAQ
 
+![FAQ](./screenshots/FAQ.png)
 
+### 🏠 About
 
+![About](./screenshots/About1.png)
+
+![About](./screenshots/About2.png)
+
+### SignIn
+
+![signIn](./screenshots/signIn.png)
 
 ## 📦 Installation
 
@@ -79,10 +86,7 @@
 
     ```
 
-
- ---
-
-
+---
 
 ## 🔐 Environment Setup
 
@@ -104,8 +108,6 @@
 
 ---
 
-
-
 ## 💻 Run Locally
 
 ```
@@ -117,22 +119,18 @@ npm run dev
 
 ---
 
-
-
-
 ## 🤝 Contributing
 
-### 1 Fork this repo
+1 Fork this repo
 
-### 2 Create a feature branch
+2 Create a feature branch
 
-### 3 Commit changes
+3 Commit changes
 
-### 4 Open a PR
+4 Open a PR
 
 ---
 
-
 ## 🧑‍💼 Author
 
-### Ishan Saini
+Ishan Saini
