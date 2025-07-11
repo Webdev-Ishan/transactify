@@ -3,7 +3,7 @@ import razorpay from "@/lib/razorpayConfig";
 import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
-export const transactionSchema = z.object({
+ const transactionSchema = z.object({
   amount: z.string(),
   Number: z.number(),
 });

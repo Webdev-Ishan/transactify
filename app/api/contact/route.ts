@@ -4,7 +4,7 @@ import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { Resend } from "resend";
 
-export const Contactschema = z.object({
+ const Contactschema = z.object({
   topic: z.string().min(2).max(20),
   content: z.string().min(12).max(100),
 });

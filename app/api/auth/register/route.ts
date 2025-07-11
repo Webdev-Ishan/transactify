@@ -4,7 +4,7 @@ import { z } from "zod";
 import bcrypt from "bcrypt";
 import { Resend } from "resend";
 
-export const registerSchema = z.object({
+ const registerSchema = z.object({
   username: z.string().min(3).max(16),
   email: z.string().nonempty(),
   password: z.string().min(6),

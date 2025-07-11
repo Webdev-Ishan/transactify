@@ -2,7 +2,7 @@ import { prisma } from "@/lib/DB";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
-export const otpSchema = z.object({
+ const otpSchema = z.object({
   otp: z.string().length(6),
   email: z.string(),
 });
