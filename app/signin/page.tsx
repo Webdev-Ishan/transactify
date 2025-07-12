@@ -46,7 +46,7 @@ export default function SignupFormDemo() {
       const response = await signIn("credentials", {
         email: result.data.email, // assume backend returns this
         password: result.data.password,
-        redirect:false
+        redirect: false,
       });
 
       if (response?.ok) {
@@ -66,6 +66,7 @@ export default function SignupFormDemo() {
       setpassword("");
     }
   };
+
   return (
     <div className="w-full h-auto flex mt-10 justify-center items-center mb-4">
       <div className="shadow-input mt-10  ml-2 mr-2 bg-black   w-full max-w-md rounded-none  border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
@@ -166,5 +167,3 @@ const LabelInputContainer = ({
     </div>
   );
 };
-
-
