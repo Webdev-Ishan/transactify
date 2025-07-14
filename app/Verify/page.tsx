@@ -44,7 +44,7 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: parsedAmount ,
+              amount: amountParam ,
             });
 
             if (verifyRes.data.success) {
