@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: amountNumber,
+          amount: amount,
           Status: "COMPLETED",
           senderId,
           receiverId,
