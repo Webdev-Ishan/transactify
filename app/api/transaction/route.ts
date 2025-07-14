@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
           success: false,
           message: "Insufficent Balance.",
           token,
+          amount
         },
         {
           status: 403,
