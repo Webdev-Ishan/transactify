@@ -44,12 +44,12 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: amountParam ,
+              amount: Number(amountParam) ,
             });
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              console.log(amountParam)
+              console.log(typeof(amountParam))
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
