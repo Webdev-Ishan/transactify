@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: validatedAmount,
+          amount: validatedAmount*100,
           Status: "COMPLETED",
           senderId,
           receiverId,
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: sender.email,
         subject: "💸 Transaction Sent",
-        text: `You sent ₹${validatedAmount / 100} to ${receiver.number}`,
+        text: `You sent ₹${validatedAmount } to ${receiver.number}`,
       });
     }
 
@@ -113,11 +113,11 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: receiver.email,
         subject: "💰 Transaction Received",
-        text: `You received ₹${validatedAmount / 100} from ${sender.number}`,
+        text: `You received ₹${validatedAmount } from ${sender.number}`,
       });
     }
 
-    return NextResponse.json({ success: true, transaction });
+    return NextResponse.json({ success: true, transaction, amount });
   } catch (error) {
     console.error("Transaction error:", error);
     return NextResponse.json(
