@@ -3,8 +3,8 @@ import razorpay from "@/lib/razorpayConfig";
 import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
- const transactionSchema = z.object({
-  amount: z.string(),
+const transactionSchema = z.object({
+  amount: z.preprocess((val) => Number(val), z.number().positive()),
   Number: z.number(),
 });
 
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
     }
 
     const options = {
-      amount: amount * 100, // Razorpay expects the amount in paise
+      amount: Math.round(amount * 100), // Razorpay expects the amount in paise
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
     };

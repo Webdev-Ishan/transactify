@@ -30,7 +30,7 @@ export default function CreateOrderPage() {
     try {
       setLoading(true);
       const res = await axios.post("/api/transaction", {
-        amount,
+        amount: Number(amount),
         Number: Number(number),
       });
 
