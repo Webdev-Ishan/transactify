@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const amountNumber = Math.round(Number(amount)); // already in paise;
+    const amountNumber = Number(amount); // already in paise;
     const sender = await prisma.user.findUnique({ where: { id: senderId } });
     const receiver = await prisma.user.findUnique({
       where: { id: receiverId },
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: amountNumber,
+          amount: Number(amount),
           Status: "COMPLETED",
           senderId,
           receiverId,
