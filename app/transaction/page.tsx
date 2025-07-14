@@ -49,6 +49,7 @@ export default function CreateOrderPage() {
           toast.error("Login please.");
         } else if (status === 403) {
           toast.error("Not Enough Balance");
+          console.log(error);
         } else {
           toast.error("Unexpected Error");
           console.log(error);
