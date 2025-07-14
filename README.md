@@ -2,7 +2,7 @@
 
 ---
 
-## 🚀 Live Demo - [text](https://transactify-three.vercel.app/)
+## 🚀 Live Demo - [Transactify](https://transactify-three.vercel.app/)
 
 ---
 
