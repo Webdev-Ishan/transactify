@@ -30,10 +30,9 @@ export default function CreateOrderPage() {
     try {
       setLoading(true);
       const res = await axios.post("/api/transaction", {
-        amount: Number(amount),
+        amount: Math.round(Number(amount) * 100),
         Number: Number(number),
       });
-
       const { order, senderid, recieverid } = res.data;
 
       // Redirect to Razorpay checkout verify page

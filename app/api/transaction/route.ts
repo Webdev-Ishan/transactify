@@ -4,7 +4,7 @@ import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
 const transactionSchema = z.object({
-  amount: z.preprocess((val) => Number(val), z.number().positive()),
+  amount: z.preprocess((val) => Number(val), z.number().positive().min(1)),
   Number: z.number(),
 });
 
