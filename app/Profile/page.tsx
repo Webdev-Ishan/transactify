@@ -105,7 +105,7 @@ export default function Profile() {
                 Account Balance:
               </span>
               <span className="font-semibold text-lg text-green-400">
-                ${balance}
+                ₹{balance}
               </span>
             </li>
           </ul>

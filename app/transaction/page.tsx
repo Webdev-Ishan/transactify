@@ -30,8 +30,8 @@ export default function CreateOrderPage() {
     try {
       setLoading(true);
       const res = await axios.post("/api/transaction", {
-        amount: Math.round(Number(amount) * 100),
-        Number: Number(number),
+        amount: amount,
+        Number: number,
       });
       const { order, senderid, recieverid } = res.data;
 

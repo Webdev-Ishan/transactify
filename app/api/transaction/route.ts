@@ -4,7 +4,7 @@ import z from "zod";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "@/lib/DB";
 const transactionSchema = z.object({
-  amount: z.preprocess((val) => Number(val), z.number().positive().min(1)),
+  amount: z.string(),
   Number: z.number(),
 });
 
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (existSender.balance <= amount - 100) {
+    if (existSender.balance - amount <= 50) {
       return NextResponse.json(
         {
           success: false,
