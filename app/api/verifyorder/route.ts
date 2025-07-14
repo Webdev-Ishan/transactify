@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     razorpay_signature,
     senderId,
     receiverId,
-    amount, // in paise
+    amount: validatedAmount, // ✅ safer name
   } = parsed.data;
 
   // Step 1: Verify signature
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Step 3: Ensure sender has sufficient balance
-    if (sender.balance < amount) {
+    if (sender.balance < validatedAmount) {
       return NextResponse.json(
         { success: false, message: "Sender has insufficient balance" },
         { status: 403 }
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount:amount,
+          amount: validatedAmount,
           Status: "COMPLETED",
           senderId,
           receiverId,
@@ -90,11 +90,11 @@ export async function POST(req: NextRequest) {
       }),
       prisma.user.update({
         where: { id: senderId },
-        data: { balance: { decrement: amount } },
+        data: { balance: { decrement: validatedAmount } },
       }),
       prisma.user.update({
         where: { id: receiverId },
-        data: { balance: { increment: amount } },
+        data: { balance: { increment: validatedAmount } },
       }),
     ]);
 
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: sender.email,
         subject: "💸 Transaction Sent",
-        text: `You sent ₹${amount / 100} to ${receiver.number}`,
+        text: `You sent ₹${validatedAmount / 100} to ${receiver.number}`,
       });
     }
 
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: receiver.email,
         subject: "💰 Transaction Received",
-        text: `You received ₹${amount / 100} from ${sender.number}`,
+        text: `You received ₹${validatedAmount / 100} from ${sender.number}`,
       });
     }
 
@@ -129,4 +129,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
