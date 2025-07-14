@@ -31,7 +31,7 @@ export default function VerifyPaymentPage() {
     const openRazorpayCheckout = () => {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: parsedAmount * 100, // in paise
+        amount: parsedAmount, // in paise
         currency: "INR",
         name: "Transactify",
         description: "Payment Transfer",
@@ -44,11 +44,12 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: parsedAmount * 100,
+              amount: parsedAmount ,
             });
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
+              console.log(amountParam)
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
