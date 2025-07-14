@@ -31,7 +31,7 @@ export default function VerifyPaymentPage() {
     const openRazorpayCheckout = () => {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: parsedAmount, // in paise
+        amount: parsedAmount*100, // in paise
         currency: "INR",
         name: "Transactify",
         description: "Payment Transfer",
