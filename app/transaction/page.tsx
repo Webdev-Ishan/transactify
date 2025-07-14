@@ -31,7 +31,7 @@ export default function CreateOrderPage() {
       setLoading(true);
       const res = await axios.post("/api/transaction", {
         amount: amount,
-        Number: number,
+        Number: Number(number),
       });
       const { order, senderid, recieverid } = res.data;
 
@@ -49,7 +49,7 @@ export default function CreateOrderPage() {
           toast.error("Login please.");
         } else if (status === 403) {
           toast.error("Not Enough Balance");
-          console.log(error);
+          console.log(error.response.data);
         } else {
           toast.error("Unexpected Error");
           console.log(error);

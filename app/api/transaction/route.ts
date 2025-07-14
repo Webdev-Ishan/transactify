@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (existSender.balance - amount <= 50) {
+    if (existSender.balance - amount <= 0) {
       return NextResponse.json(
         {
           success: false,
