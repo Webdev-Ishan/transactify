@@ -11,54 +11,46 @@ export default function CreateOrderPage() {
   const [number, setNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const { data: session, status } = useSession();
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/signin");
     }
-  }, [session, status, router]);
+  }, [status, router,session]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!amount || !number) {
-      alert("Please enter all fields");
+    const parsedAmount = Number(amount.trim());
+    const parsedNumber = Number(number.trim());
+
+    if (!parsedAmount || isNaN(parsedAmount) || parsedAmount <= 0 || isNaN(parsedNumber)) {
+      toast.error("Enter valid number and amount.");
       return;
     }
 
     try {
       setLoading(true);
       const res = await axios.post("/api/transaction", {
-        amount: amount,
-        Number: Number(number),
+        amount: parsedAmount,
+        Number: parsedNumber,
       });
+
       const { order, senderid, recieverid } = res.data;
 
-      // Redirect to Razorpay checkout verify page
       router.push(
-        `/Verify?order_id=${order.id}&senderid=${senderid}&receiverid=${recieverid}&amount=${amount}`
+        `/Verify?order_id=${order.id}&senderid=${senderid}&receiverid=${recieverid}&amount=${parsedAmount}`
       );
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const status = error.response.status;
-
-        if (status === 404) {
-          toast.error("Check reciever info again.");
-        } else if (status === 401) {
-          toast.error("Login please.");
-        } else if (status === 403) {
-          toast.error("Not Enough Balance");
-          console.log(error.response.data);
-        } else {
-          toast.error("Unexpected Error");
-          console.log(error);
-        }
+        if (status === 404) toast.error("Check receiver info again.");
+        else if (status === 401) toast.error("Login please.");
+        else if (status === 403) toast.error("Not Enough Balance");
+        else toast.error("Unexpected Error");
       } else {
-        if (error instanceof Error) {
-          console.error(error);
-          toast.error("Something went wrong");
-        }
+        toast.error("Something went wrong");
       }
     } finally {
       setLoading(false);

@@ -2,9 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/DB";
 import { Resend } from "resend";
+import z from "zod";
+
+const paymentSchema = z.object({
+  razorpay_payment_id: z.string(),
+  razorpay_order_id: z.string(),
+  razorpay_signature: z.string(),
+  senderId: z.number(),
+  receiverId: z.number(),
+  amount: z.number().positive(), // must be in paise
+});
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  const parsed = paymentSchema.safeParse(body);
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: parsed.error.flatten(),
+      },
+      { status: 400 }
+    );
+  }
 
   const {
     razorpay_payment_id,
@@ -12,124 +33,100 @@ export async function POST(req: NextRequest) {
     razorpay_signature,
     senderId,
     receiverId,
-    amount,
-  } = body;
+    amount, // in paise
+  } = parsed.data;
 
-  if (
-    !razorpay_payment_id ||
-    !razorpay_order_id ||
-    !razorpay_signature ||
-    !senderId ||
-    !receiverId ||
-    !amount
-  ) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Payment failed due to missing credentials.",
-      },
-      {
-        status: 409,
-      }
-    );
-  }
-
-  const verify_signature = crypto
+  // Step 1: Verify signature
+  const expectedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_SECRET!)
     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
     .digest("hex");
 
-  if (verify_signature !== razorpay_signature) {
+  if (expectedSignature !== razorpay_signature) {
     return NextResponse.json(
       {
         success: false,
-        message: "Payment Verification failed!",
+        message: "❌ Razorpay signature verification failed",
       },
-      {
-        status: 400,
-      }
+      { status: 400 }
     );
   }
 
   try {
-    const amountNumber = amount; // already in paise;
-    const sender = await prisma.user.findUnique({ where: { id: senderId } });
-    const receiver = await prisma.user.findUnique({
-      where: { id: receiverId },
-    });
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    // Step 2: Fetch sender and receiver
+    const [sender, receiver] = await Promise.all([
+      prisma.user.findUnique({ where: { id: senderId } }),
+      prisma.user.findUnique({ where: { id: receiverId } }),
+    ]);
 
-    if (!amountNumber || !sender || !receiver || !resend) {
+    if (!sender || !receiver) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "User details not found",
-        },
-        {
-          status: 404,
-        }
+        { success: false, message: "Sender or receiver not found" },
+        { status: 404 }
       );
     }
 
-    const newSenderbalance = sender.balance - amountNumber;
-    const newReceiverbalance = receiver.balance + amountNumber;
+    // Step 3: Ensure sender has sufficient balance
+    if (sender.balance < amount) {
+      return NextResponse.json(
+        { success: false, message: "Sender has insufficient balance" },
+        { status: 403 }
+      );
+    }
 
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // Step 4: Perform atomic transaction
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: amount,
+          amount,
           Status: "COMPLETED",
           senderId,
           receiverId,
-          completedAt: new Date(Date.now()),
+          completedAt: new Date(),
           razorpayID: razorpay_payment_id,
         },
       }),
-
       prisma.user.update({
-        where: {
-          id: senderId,
-        },
-        data: {
-          balance: newSenderbalance,
-        },
+        where: { id: senderId },
+        data: { balance: { decrement: amount } },
       }),
       prisma.user.update({
-        where: {
-          id: receiverId,
-        },
-        data: {
-          balance: newReceiverbalance,
-        },
+        where: { id: receiverId },
+        data: { balance: { increment: amount } },
       }),
     ]);
 
-    await resend.emails.send({
-      from: "Transactify <onboarding@resend.dev>",
-      to: sender.email,
-      subject: "Transaction alert",
-      text: `A transaction from your account has been done to ${receiver.number} of amount ${amount}`,
-    });
+    // Step 5: Send emails (fail silently if needed)
+    if (sender.email) {
+      await resend.emails.send({
+        from: "Transactify <onboarding@resend.dev>",
+        to: sender.email,
+        subject: "💸 Transaction Sent",
+        text: `You sent ₹${amount / 100} to ${receiver.number}`,
+      });
+    }
 
-    await resend.emails.send({
-      from: "Transactify <onboarding@resend.dev>",
-      to: receiver.email,
-      subject: "Transaction alert",
-      text: `A transaction to your account has been done by ${receiver.number} of amount ${amount}`,
-    });
+    if (receiver.email) {
+      await resend.emails.send({
+        from: "Transactify <onboarding@resend.dev>",
+        to: receiver.email,
+        subject: "💰 Transaction Received",
+        text: `You received ₹${amount / 100} from ${sender.number}`,
+      });
+    }
 
     return NextResponse.json({ success: true, transaction });
   } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: error.message,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    console.error("Transaction error:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }
+

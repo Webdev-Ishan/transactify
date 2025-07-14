@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -18,18 +19,19 @@ export default function VerifyPaymentPage() {
     const orderId = searchParams.get("order_id");
     const senderId = searchParams.get("senderid");
     const receiverId = searchParams.get("receiverid");
-    const amount = searchParams.get("amount");
+    const amountParam = searchParams.get("amount");
 
-    console.log(amount);
-    if (!orderId || !senderId || !receiverId || !amount) {
-      console.error("Missing payment params in URL");
+    const parsedAmount = Number(amountParam);
+
+    if (!orderId || !senderId || !receiverId || isNaN(parsedAmount) || parsedAmount <= 0) {
+      alert("Invalid or missing payment parameters");
       return;
     }
 
     const openRazorpayCheckout = () => {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: Number(amount) * 100, // in paise
+        amount: parsedAmount * 100, // in paise
         currency: "INR",
         name: "Transactify",
         description: "Payment Transfer",
@@ -42,21 +44,17 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: Number(amount)*100 ,
+              amount: parsedAmount * 100,
             });
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              console.log(verifyRes);
-              // or any success page
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
           } catch (error) {
-            if (error instanceof Error) {
-              console.error(error);
-              alert("❌ Error verifying payment");
-            }
+            console.error(error);
+            alert("❌ Error verifying payment");
           } finally {
             router.push("/Profile");
           }
@@ -77,7 +75,7 @@ export default function VerifyPaymentPage() {
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <h1
         onClick={() => router.push("/Profile")}
-        className="text-xl rounded-lg py-2 px-4 bg-slate-700 border-2  animate-pulse"
+        className="text-xl rounded-lg py-2 px-4 bg-slate-700 border-2 animate-pulse cursor-pointer"
       >
         Back to Profile
       </h1>
