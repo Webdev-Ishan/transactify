@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
           Status: "COMPLETED",
           senderId,
           receiverId,
-          completedAt: Date.now().toString(),
+          completedAt: new Date(Date.now()),
           razorpayID: razorpay_payment_id,
         },
       }),
