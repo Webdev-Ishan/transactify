@@ -105,14 +105,14 @@ export async function POST(req: NextRequest) {
     ]);
 
     await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
+      from: "Transactify <onboarding@resend.dev>",
       to: sender.email,
       subject: "Transaction alert",
       text: `A transaction from your account has been done to ${receiver.number} of amount ${amount}`,
     });
 
     await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
+      from: "Transactify <onboarding@resend.dev>",
       to: receiver.email,
       subject: "Transaction alert",
       text: `A transaction to your account has been done by ${receiver.number} of amount ${amount}`,

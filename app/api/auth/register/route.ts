@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     });
 
     await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
+      from: "Transactify <onboarding@resend.dev>",
       to: createduser.email,
       subject: "OTP verification",
       html: `<!DOCTYPE html>

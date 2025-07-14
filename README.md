@@ -2,7 +2,7 @@
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo - [text](https://transactify-three.vercel.app/)
 
 ---
 
@@ -49,6 +49,8 @@ Deployment: Vercel
 ![Homepage](./screenshots/home2.png)
 
 ---
+---
+
 
 ![Homepage](./screenshots/home3.png)
 
@@ -74,6 +76,7 @@ Deployment: Vercel
 
 ![About](./screenshots/About1.png)
 
+---
 ---
 
 ![About](./screenshots/About2.png)

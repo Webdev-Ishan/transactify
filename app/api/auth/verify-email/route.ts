@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/DB";
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 import z from "zod";
 
- const otpSchema = z.object({
+const otpSchema = z.object({
   otp: z.string().length(6),
   email: z.string(),
 });
@@ -10,7 +11,7 @@ import z from "zod";
 export async function POST(req: NextRequest) {
   const data = await req.json();
   const parsedBody = otpSchema.safeParse(data);
-
+  const resend = new Resend(process.env.RESEND_API_KEY);
   if (!parsedBody.success) {
     return NextResponse.json(
       { success: false, error: parsedBody.error.format() },
@@ -54,6 +55,13 @@ export async function POST(req: NextRequest) {
 
       await prisma.otp.deleteMany({
         where: { email },
+      });
+
+      await resend.emails.send({
+        from: "Transactify <onboarding@resend.dev>",
+        to: user.email,
+        subject: "Welcome",
+        text: "You registration was successfull, welcome to the transactify",
       });
 
       return NextResponse.json(
