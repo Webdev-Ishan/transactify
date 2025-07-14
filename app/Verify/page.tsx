@@ -20,6 +20,7 @@ export default function VerifyPaymentPage() {
     const receiverId = searchParams.get("receiverid");
     const amount = searchParams.get("amount");
 
+    console.log(amount);
     if (!orderId || !senderId || !receiverId || !amount) {
       console.error("Missing payment params in URL");
       return;
@@ -41,7 +42,7 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: Math.round(Number(amount) * 100),
+              amount: Number(amount)*100 ,
             });
 
             if (verifyRes.data.success) {
