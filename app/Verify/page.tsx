@@ -49,7 +49,7 @@ export default function VerifyPaymentPage() {
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              console.log(typeof(amountParam))
+              console.log(verifyRes.data.transaction)
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
