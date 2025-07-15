@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const safeamount = Math.round(validatedAmount);
+    const safeamount = Math.round(validatedAmount * 100); // ← ✅ Convert rupees to paise
     console.log(safeamount);
     console.log(typeof safeamount);
     // Step 4: Perform atomic transaction
