@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: Number(validatedAmount * 100),
+          amount: Math.round(validatedAmount),
           Status: "COMPLETED",
           senderId,
           receiverId,
@@ -117,7 +117,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json({ success: true, transaction,amount:validatedAmount });
+    return NextResponse.json({
+      success: true,
+      transaction,
+      amount: validatedAmount,
+    });
   } catch (error) {
     console.error("Transaction error:", error);
     return NextResponse.json(

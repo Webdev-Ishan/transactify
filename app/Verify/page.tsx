@@ -37,7 +37,7 @@ export default function VerifyPaymentPage() {
     const openRazorpayCheckout = () => {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: parsedAmount * 100, // in paise
+        amount: Math.round(parsedAmount * 100), // ✅ This sends ₹1 as 100 paise
         currency: "INR",
         name: "Transactify",
         description: "Payment Transfer",
@@ -57,6 +57,7 @@ export default function VerifyPaymentPage() {
               alert("✅ Transaction Successful!");
               console.log(verifyRes.data.transaction);
               console.log(verifyRes.data.amount);
+              console.log(typeof verifyRes.data.amount);
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
