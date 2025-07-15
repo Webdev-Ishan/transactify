@@ -23,7 +23,13 @@ export default function VerifyPaymentPage() {
 
     const parsedAmount = Number(amountParam);
 
-    if (!orderId || !senderId || !receiverId || isNaN(parsedAmount) || parsedAmount <= 0) {
+    if (
+      !orderId ||
+      !senderId ||
+      !receiverId ||
+      isNaN(parsedAmount) ||
+      parsedAmount <= 0
+    ) {
       alert("Invalid or missing payment parameters");
       return;
     }
@@ -31,7 +37,7 @@ export default function VerifyPaymentPage() {
     const openRazorpayCheckout = () => {
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: parsedAmount*100, // in paise
+        amount: parsedAmount * 100, // in paise
         currency: "INR",
         name: "Transactify",
         description: "Payment Transfer",
@@ -44,12 +50,13 @@ export default function VerifyPaymentPage() {
               razorpay_signature: response.razorpay_signature,
               senderId: Number(senderId),
               receiverId: Number(receiverId),
-              amount: Number(amountParam) ,
+              amount: Number(amountParam),
             });
 
             if (verifyRes.data.success) {
               alert("✅ Transaction Successful!");
-              console.log(verifyRes.data.transaction)
+              console.log(verifyRes.data.transaction);
+              console.log(verifyRes.data.amount);
             } else {
               alert("❌ Transaction Failed: " + verifyRes.data.message);
             }
