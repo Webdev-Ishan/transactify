@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json({ success: true, transaction,validatedAmount });
+    return NextResponse.json({ success: true, transaction,amount:validatedAmount });
   } catch (error) {
     console.error("Transaction error:", error);
     return NextResponse.json(
