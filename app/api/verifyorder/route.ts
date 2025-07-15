@@ -76,13 +76,14 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    console.log(Math.round(validatedAmount));
-    console.log(typeof Math.round(validatedAmount));
+    const safeamount = Math.round(validatedAmount);
+    console.log(safeamount);
+    console.log(typeof safeamount);
     // Step 4: Perform atomic transaction
     const [transaction] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
-          amount: validatedAmount,
+          amount: safeamount,
           Status: "COMPLETED",
           senderId,
           receiverId,
