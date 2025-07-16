@@ -141,7 +141,7 @@ export default function SignupFormDemo() {
           </div>
           <div
             onClick={() => router.push("/register")}
-            className="w-full text-blue-500 flex justify-center items-center gap-4"
+            className="w-full text-blue-500 mt-2 flex justify-center items-center gap-4"
           >
             Create an Account
           </div>

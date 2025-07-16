@@ -88,7 +88,7 @@ export default function SignupFormDemo() {
     }
   };
   return (
-    <div className="w-full h-auto flex mt-12 justify-center items-center mb-4">
+    <div className="w-full h-auto flex mt-14 justify-center items-center mb-4">
       <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white border border-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
         <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
           Welcome to Transactify
@@ -162,8 +162,8 @@ export default function SignupFormDemo() {
           <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
         </form>
         <div
-          onClick={() => router.push("/register")}
-          className="w-full text-blue-500 flex justify-center items-center gap-4"
+          onClick={() => router.push("/signin")}
+          className="w-full text-blue-500 mt-2 flex justify-center items-center gap-4"
         >
           Already have an account?
         </div>
