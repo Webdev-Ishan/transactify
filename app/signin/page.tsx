@@ -112,7 +112,7 @@ export default function SignupFormDemo() {
         </form>
         <button
           className="group/btn py-1 relative transition duration-300 hover:shadow-blue-500 block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-          onClick={() => signIn("google", { callbackUrl: "/" })}
+          onClick={() => signIn("google", { callbackUrl: "/Profile" })}
         >
           <div className="w-full  flex justify-center items-center gap-4">
             <Image
@@ -127,7 +127,7 @@ export default function SignupFormDemo() {
         </button>
         <button
           className="group/btn mt-3 transition duration-300 hover:shadow-blue-500 relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-          onClick={() => signIn("github", { callbackUrl: "/" })}
+          onClick={() => signIn("github", { callbackUrl: "/Profile" })}
         >
           <div className="w-full  flex justify-center items-center gap-4">
             <Image
