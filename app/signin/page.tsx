@@ -139,6 +139,12 @@ export default function SignupFormDemo() {
             />
             Login with Github
           </div>
+          <div
+            onClick={() => router.push("/register")}
+            className="w-full text-blue-500 flex justify-center items-center gap-4"
+          >
+            Create an Account
+          </div>
         </button>
       </div>
     </div>

@@ -161,6 +161,12 @@ export default function SignupFormDemo() {
 
           <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
         </form>
+        <div
+          onClick={() => router.push("/register")}
+          className="w-full text-blue-500 flex justify-center items-center gap-4"
+        >
+          Already have an account?
+        </div>
       </div>
     </div>
   );
