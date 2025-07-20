@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
@@ -48,27 +49,27 @@ function Footer() {
             </a>
             <ul className="text-lg flex items-center justify-center flex-col gap-7 md:flex-row md:gap-12 transition-all duration-500 py-16 mb-10 border-b border-gray-200">
               <li>
-                <a href="#" className="text-white hover:text-white">
+                <Link href="https://github.com/Webdev-Ishan" className="text-white hover:text-white">
                   Transactify
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className=" text-white hover:text-white">
+                <a href="https://github.com/Webdev-Ishan" className=" text-white hover:text-white">
                   Products
                 </a>
               </li>
               <li>
-                <a href="#" className=" text-white hover:text-white">
+                <a href="https://github.com/Webdev-Ishan" className=" text-white hover:text-white">
                   Resources
                 </a>
               </li>
               <li>
-                <a href="#" className=" text-white hover:text-white">
+                <a href="https://github.com/Webdev-Ishan" className=" text-white hover:text-white">
                   Blogs
                 </a>
               </li>
               <li>
-                <a href="#" className=" text-white hover:text-white">
+                <a href="https://github.com/Webdev-Ishan" className=" text-white hover:text-white">
                   Support
                 </a>
               </li>

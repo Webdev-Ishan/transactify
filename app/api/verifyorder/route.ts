@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Step 3: Ensure sender has sufficient balance
-    if (sender.balance < validatedAmount) {
+    if (sender.balance < validatedAmount || sender.balance <= 0) {
       return NextResponse.json(
         { success: false, message: "Sender has insufficient balance" },
         { status: 403 }
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const safeamount = Math.round(validatedAmount ); // ← ✅ Convert rupees to paise
+    const safeamount = Math.round(validatedAmount); // ← ✅ Convert rupees to paise
 
     console.log(typeof safeamount.toString());
     // Step 4: Perform atomic transaction
@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: sender.email,
         subject: "💸 Transaction Sent",
-        text: `You sent ₹${validatedAmount} to ${receiver.number}`,
+        text: `You sent ₹${validatedAmount} to ${receiver.username} at the upiID: ${receiver.upiID}`,
       });
     }
 
@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
         from: "Transactify <onboarding@resend.dev>",
         to: receiver.email,
         subject: "💰 Transaction Received",
-        text: `You received ₹${validatedAmount} from ${sender.number}`,
+        text: `You received ₹${validatedAmount} from ${sender.username} at the upiID: ${sender.upiID}`,
       });
     }
 

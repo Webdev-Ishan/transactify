@@ -9,7 +9,7 @@ export function CarouselDemo() {
       src: "https://media.istockphoto.com/id/1143910377/photo/trader-at-work.jpg?s=612x612&w=0&k=20&c=JdIDjG8Fgu-2DHzm-5WIkojO7Oa9-S5BPSPjcnp2N9Y=",
     },
     {
-      title: "Lates tech",
+      title: "Latest tech",
       button: "Try Us!!",
       src: "https://media.istockphoto.com/id/1630663973/photo/woman-hand-holding-virtual-global-internet-connection-metaverse-business-global-internet.jpg?s=612x612&w=0&k=20&c=uT3exMBlXQi37GvX-hANO9eJA2eqRtjrbqCtEOJ1VRE=",
     },
