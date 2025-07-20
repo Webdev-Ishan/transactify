@@ -1,145 +1,122 @@
-## 📱 Transactify – Money transfer app built with Next.js,Postgress,Next-auth and Razorpay
+<h1 align="center">🚀 Transactify</h1>
+<p align="center">
+  <b>Money transfer app built with Next.js, PostgreSQL, NextAuth, and Razorpay</b><br>
+  <img src="https://img.shields.io/badge/Next.js-14.0-blue?logo=nextdotjs" />
+  <img src="https://img.shields.io/badge/PostgreSQL-ORM-blue?logo=postgresql" />
+  <img src="https://img.shields.io/badge/TailwindCSS-3.0-blue?logo=tailwindcss" />
+  <img src="https://img.shields.io/badge/NextAuth-secure-green?logo=nextdotjs" />
+  <img src="https://img.shields.io/badge/Razorpay-payments-blue?logo=razorpay" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
 ---
 
-## 🚀 Live Demo - [Transactify](https://transactify-three.vercel.app/)
+## 🌐 Live Demo
+
+👉 [Transactify on Vercel](https://transactify-three.vercel.app/)
 
 ---
 
 ## 🧰 Tech Stack
 
-Frontend: Next.js / Tailwind CSS/ Shadcn / acertnity UI
-
-Backend: Next.js API
-
-Database: PostgreSQL with Prisma ORM
-
-Auth: NextAuth
-
-Payments: Razorpay SDK (test mode)
-
-Deployment: Vercel
+- **Frontend:** Next.js, Tailwind CSS, Shadcn, Acertnity UI
+- **Backend:** Next.js API Routes
+- **Database:** PostgreSQL + Prisma ORM
+- **Authentication:** NextAuth.js
+- **Payments:** Razorpay SDK (test mode)
+- **Deployment:** Vercel
 
 ---
 
-## 🔑 Features
+## ✨ Features
 
-✅ Secure authentication & user sessions
-
-✅ Send/receive money using UPI ID or phone number
-
-✅ Razorpay payment integration
-
-✅ Transaction history and logs
-
-✅ Responsive UI with Tailwind CSS
-
-✅ Error handling and toast notifications
+- 🔒 Secure authentication & user sessions
+- 💸 Send/receive money via UPI ID or phone number
+- ⚡ Razorpay payment integration
+- 📜 Transaction history & logs
+- 📱 Responsive UI (Tailwind CSS)
+- 🚨 Error handling & toast notifications
+- 👤 Google & GitHub OAuth support
+- 🛡️ Encrypted data transfer
+- 🧩 Modular, scalable codebase
 
 ---
 
-## 📸 Screenshots
+## 🖼️ Screenshots
 
-### 🏠 Homepage
+| Homepage | Transaction History | Profile |
+|---|---|---|
+| ![Homepage](./screenshots/home1.png) | ![TransacionList](./screenshots/transactionList.png) | ![Profile](./screenshots/profile.png) |
 
-![Homepage](./screenshots/home1.png)
-
----
-
-![Homepage](./screenshots/home2.png)
-
----
----
-
-
-![Homepage](./screenshots/home3.png)
-
-### 🏠 Transaction History
-
-![TransacionList](./screenshots/transactionList.png)
-
-### 🏠 Profile
-
-![Profile](./screenshots/profile.png)
-
-### 🏠 ContactUS
-
-![Contact](./screenshots/contactForm.png)
+| Contact Us | FAQ | About | Sign In |
+|---|---|---|---|
+| ![Contact](./screenshots/contactForm.png) | ![FAQ](./screenshots/FAQ.png) | ![About](./screenshots/About1.png) | ![signIn](./screenshots/signIn.png) |
 
 ---
 
-### 🏠 FAQ
+## ⚡ Quick Start
 
-![FAQ](./screenshots/FAQ.png)
-
-### 🏠 About
-
-![About](./screenshots/About1.png)
-
----
----
-
-![About](./screenshots/About2.png)
-
-### SignIn
-
-![signIn](./screenshots/signIn.png)
-
-## 📦 Installation
-
-    ``` git bash
-
-     git clone https://github.com/Webdev-Ishan/transactify.git
-     cd transactify
-     npm install
-
-    ```
+```bash
+git clone https://github.com/Webdev-Ishan/transactify.git
+cd transactify
+npm install
+```
 
 ---
 
 ## 🔐 Environment Setup
 
-```
-  DATABASE_URL=your postgress url
-  NODE_ENV= "dev" || "production
-  SALT= your salt for bcrypt
-  RESEND_API_KEY=your resend api key
-  NEXT_AUTH_SECRET= your auth secret
-  GOOGLE_CLIENT_ID= google client id
-  GOOGLE_CLIENT_SECRET= google client secret
-  GITHUB_ID= github id
-  GITHUB_SECRET= github secret
-   RAZORPAY_ID= your razorpay id
-   RAZORPAY_SECRET= your razorpay secret
-  NEXT_PUBLIC_RAZORPAY_KEY_ID=  your razorpay id(same)
+Create a `.env` file in the root directory:
 
+```env
+DATABASE_URL=your_postgres_url
+NODE_ENV=dev
+SALT=your_bcrypt_salt
+RESEND_API_KEY=your_resend_api_key
+NEXT_AUTH_SECRET=your_auth_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GITHUB_ID=your_github_id
+GITHUB_SECRET=your_github_secret
+RAZORPAY_ID=your_razorpay_id
+RAZORPAY_SECRET=your_razorpay_secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_id
 ```
 
 ---
 
-## 💻 Run Locally
+## 🛠️ Local Development
 
-```
+```bash
 npx prisma generate
 npx prisma db push
 npm run dev
-
 ```
 
 ---
 
 ## 🤝 Contributing
 
-1 Fork this repo
-
-2 Create a feature branch
-
-3 Commit changes
-
-4 Open a PR
+1. Fork this repo
+2. Create a feature branch
+3. Commit your changes
+4. Open a PR
 
 ---
 
 ## 🧑‍💼 Author
 
-Ishan Saini
+**Ishan Saini**  
+[GitHub](https://github.com/Webdev-Ishan) • [LinkedIn](https://www.linkedin.com/in/ishan-saini/)
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+<p align="center">
+  <i>Transactify – Secure, fast, and modern money transfer for everyone.</i>
+</p>
