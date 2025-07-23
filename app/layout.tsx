@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Suspense } from "react";
-import LenisProvider from "../components/ui/Lenis";
+import LenisProvider from "../components/ui/LenisProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
