@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Suspense } from "react";
-import LenisProvider from "../components/ui/LenisProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -44,9 +44,7 @@ export default function RootLayout({
           <div className="min-h-screen w-full relative flex flex-col dark">
             <Navbar />
             <main className="flex-1">
-              <Suspense fallback={<div>Loading...</div>}>
-                <LenisProvider /> {children}
-              </Suspense>
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
             </main>
             <Footer />
           </div>
