@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
   return (
     <div className="w-full h-auto pt-12 flex flex-col items-center justify-center overflow-x-hidden">
-      <div className="fixed inset-0 mt-16 -z-5 bg-black h-auto">
+      <div className="absolute inset-0 mt-16 -z-10 bg-black h-auto">
         <BackgroundBeam />
       </div>
 
