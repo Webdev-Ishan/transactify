@@ -133,8 +133,9 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
-    height: 100%;
-    scroll-behavior: auto !important;
-    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
+    scroll-behavior: smooth;
+
   }
 }
